@@ -13,8 +13,8 @@
 
 //= require jquery
 //= require jquery_ujs
-//= require bower_components/angular/angular
-//= require bower_components/bootstrap/dist/js/bootstrap
+//= require angular/angular
+//= require bootstrap/dist/js/bootstrap
 //= require angular-rails-templates
 
 //= require garry

@@ -1,0 +1,38 @@
+<div class="modal-header modal-header-sign-in">
+  <button type="button" class="close" ng-click="close()">
+    <i class="fa fa-times"></i>
+    <span class="sr-only">Close</span>
+  </button>
+  <h3 class="modal-title">My clients</h3>
+  <p>This is where you manage all your clients...</p>
+</div>
+<div class="modal-body">
+
+  <table class="table table-bordered">
+    <tr>
+      <th>Name</th>
+      <th># Waypoints</th>
+      <th># Clients</th>
+      <th>Distance</th>
+      <th>Time</th>
+    </tr>
+
+    <tr ng-repeat="path in paths" ng-class="{ success: path.active }">
+      <td>{{ path.name }}</td>
+      <td>{{ path.waypoints.length }}</td>
+      <td>{{ path.clients.length }}</td>
+      <td>{{ path.distance }}</td>
+      <td>{{ path.time }}</td>
+    </tr>
+
+  </table>
+
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-click="create()">
+    <i class="fa fa-plus"></i> Create new
+  </button>
+  <button class="btn btn-danger" ng-click="close()">
+    <i class="fa fa-times"></i> Close
+  </button>
+</div>

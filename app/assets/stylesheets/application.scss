@@ -9,5 +9,104 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require bootstrap/dist/css/bootstrap
+ *= require font-awesome/css/font-awesome
  *= require_self
  */
+
+html, body{
+  height:100%;
+}
+
+body{
+  margin-top:50px;
+}
+
+.content,
+.angular-google-map,
+.angular-google-map-container {
+  height: 100%;
+}
+
+div.path {
+  z-index:1030;
+  position:fixed;
+  top:0px;
+  left:90px;
+  width:503px;
+
+  padding:8px 20px 8px 20px;
+  background-color:#f8f8f8;
+  border:1px solid #e7e7e7;
+  border-top:none;
+}
+
+div.path_details {
+  z-index:1030;
+  position: fixed;
+  top:51px;
+  left:90px;
+  width:503px;
+
+  padding:10px 20px 10px 20px;
+  background-color:#f8f8f8;
+  border:1px solid #e7e7e7;
+  border-top:none;
+}
+
+div.path_details_content {
+  overflow:hidden;
+  height:300px;
+}
+
+
+/* Drag&Drop list begin */
+ul.draglist {
+  text-align:center;
+  list-style: none;
+  padding:0;
+}
+
+ul.draglist > li {
+  margin-top:1px;
+  display:block;
+}
+
+ul.draglist > li > div {
+  padding:4px;
+  border:1px solid #e7e7e7;
+  display:inline-table;
+  text-align:left;
+  width:350px;
+  background-color:#FFF;
+}
+
+[ng-drag] {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+[ng-drag].drag-over {
+    border-bottom: solid 1px red;
+}
+
+[ng-drag].dragging {
+    opacity: 0.5;
+}
+
+[ng-drop].drag-enter {
+    border-bottom: solid 1px red;
+}
+/* Drag&Drop list end */
+
+
+.modal-body {
+  background: #f8f8f8 image-url('swirl_pattern.png');
+}
+
+.modal-content {
+  background-color: #f8f8f8;
+}

@@ -14,9 +14,17 @@
 //= require jquery
 //= require jquery_ujs
 //= require angular/angular
+//= require angular-route/angular-route
+//= require angular-animate/angular-animate
+//= require angular-resource/angular-resource
+//= require angular-ui-router/release/angular-ui-router
 //= require bootstrap/dist/js/bootstrap
 //= require angular-rails-templates
-
+//= require perfect-scrollbar/min/perfect-scrollbar.min
+//= require lodash/dist/lodash
+//= require angular-google-maps/dist/angular-google-maps
+//= require angular-bootstrap/ui-bootstrap-tpls
+//= require ngDraggable/ngDraggable
 //= require garry
 //= require_tree ./templates
 //= require_tree ./modules

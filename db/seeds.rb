@@ -6,6 +6,12 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+
 (1..20).each do |n|
-  Path.create(name: "Chemin #{n}")
+  path = Path.create(name: "Chemin #{n}")
+
+  (1..10).each do |m|
+    path.clients << Client.create(name: "Client #{n}-#{m}")
+  end
+
 end

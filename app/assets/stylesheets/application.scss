@@ -110,3 +110,21 @@ ul.draglist > li > div {
 .modal-content {
   background-color: #f8f8f8;
 }
+
+/* Add animation */
+.animate.ng-enter.ng-enter-active,
+.animate.ng-leave {
+    opacity: 1;
+    -webkit-transition: opacity 300ms linear;
+    -moz-transition: opacity 300ms linear;
+    transition: opacity 300ms linear;
+}
+
+/* Remove animation */
+.animate.ng-leave.ng-leave-active,
+.animate.ng-enter {
+    opacity: 0;
+    -webkit-transition: opacity 300ms linear;
+    -moz-transition: opacity 300ms linear;
+    transition: opacity 300ms linear;
+}

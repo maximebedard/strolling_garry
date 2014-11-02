@@ -2,8 +2,8 @@ StrollingGarry::Application.routes.draw do
 
   root :to => 'home#index'
 
-  namespace :api do
-    resources :paths, defaults: { format: 'json' }
+  namespace :api, defaults: { format: 'json' } do
+    resources :paths
   end
 
 

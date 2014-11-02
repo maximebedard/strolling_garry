@@ -19,7 +19,8 @@
         <th>Time</th>
       </tr>
 
-      <tr ng-repeat="path in paths"
+      <tr class="animate"
+        ng-repeat="path in paths"
         ng-class="{ success: selectedPathId === path.id }"
         ng-click="setSelected(path.id)">
 

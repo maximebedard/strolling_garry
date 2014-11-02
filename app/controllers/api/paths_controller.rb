@@ -1,25 +1,38 @@
 class Api::PathsController < ApplicationController
 
-  respond_to :json
-
   def index
-    respond_with Path.all
+    render json: Path.all
   end
 
   def show
-    respond_with Path.find params[:id]
+    render json: Path.find(params[:id])
   end
 
   def create
-    respond_with Path.create(params[:path])
+    @path = Path.new(params[:path])
+
+    if @path.save
+      render json:@path, status: :created
+    else
+      render json:@path.errors, status: :unprocessable_entity
+    end
+
   end
 
   def update
-    respond_with Path.update(params[:id], params[:products])
+    @path = Path.find(params[:id])
+
+    if @path.update_attributes(params[:path])
+      head :no_content
+    else
+      render json:@path.errors, status: :unprocessable_entity
+    end
   end
 
   def destroy
-    respond_with Path.destroy(params[:id])
+    @path = Path.find(params[:id])
+    @path.destroy
+    head :no_content
   end
 
 end

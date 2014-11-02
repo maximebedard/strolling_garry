@@ -1,30 +1,55 @@
 'use strict';
 
-angular.module('myApp.controllers', ['ngRoute', 'templates'])
+angular.module('myApp.controllers', ['templates'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider
+    .when('/paths/new', {
+      templateUrl: 'path.html',
+      controller: 'NewPathCtrl'
+    })
     .when('/paths/:id', {
       templateUrl: 'path.html',
       controller: 'PathCtrl'
     });
 }])
 
-.controller('PathCtrl', ['$scope', '$log',
-  function($scope,$log) {
+.controller('NewPathCtrl', ['$scope', '$log', '$routeParams', '$location', 'Path',
+  function($scope, $log, $routeParams, $location, Path){
+    $scope.path = new Path();
 
-    $scope.name = "My Path";
-    $scope.clients = [];
-    $scope.waypoints = [];
-    $scope.isCollapsed = true;
-
-    for(var i = 0; i < 25; i++) {
-      $scope.clients[i] = { name : "client " + i};
-      $scope.waypoints[i] = { name : "waypoints " + i };
+    $scope.save = function() {
+      $scope.path.$save(function(path){
+        $location.path('/paths/' + path.id);
+      });
     }
+
+    $scope.create = function() {
+      $location.path('/paths/new');
+    }
+  }
+])
+
+
+.controller('PathCtrl', ['$scope', '$log', '$routeParams', '$location', 'Path',
+  function($scope, $log, $routeParams, $location, Path) {
+
+    $scope.path = Path.get({ id:$routeParams.id });
+
+    $scope.save = function() {
+      $log.log($scope.path);
+      $scope.path.$update();
+    }
+
+    $scope.create = function() {
+      $location.path('/paths/new');
+    }
+
+    $scope.isCollapsed = true;
 
     $('.path_details_content').perfectScrollbar();
 
+    /*
     $scope.onWaypointDropComplete = function (index, obj, evt) {
       var otherObj = $scope.waypoints[index];
       var otherIndex = $scope.waypoints.indexOf(obj);
@@ -38,32 +63,15 @@ angular.module('myApp.controllers', ['ngRoute', 'templates'])
       $scope.clients[index] = obj;
       $scope.clients[otherIndex] = otherObj;
     }
-
+    */
 
   }
 ])
 
-.controller('PathsCtrl', ['$scope', '$log', '$modalInstance', 'Path',
-  function($scope, $log, $modalInstance, Path){
+.controller('PathsCtrl', ['$scope', '$log', 'Path',
+  function($scope, $log, Path){
 
     $scope.paths = Path.query();
-
-    $scope.close = function(){
-      $modalInstance.dismiss('cancel');
-    }
-
-    $scope.edit = function(path){
-
-    }
-
-    $scope.create = function() {
-
-    }
-
-    $scope.delete = function(path) {
-      path.$delete();
-      $scope.paths.splice($scope.paths.indexOf(path), 1)
-    }
 
   }
 ])
@@ -101,6 +109,7 @@ angular.module('myApp.controllers', ['ngRoute', 'templates'])
 
     }
 
+/*
     $scope.showClients = function() {
       var modalInstance = $modal.open({
       templateUrl: 'clients.html',
@@ -120,7 +129,7 @@ angular.module('myApp.controllers', ['ngRoute', 'templates'])
       });
 
     }
-
+*/
 
   }
 ])

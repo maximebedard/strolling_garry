@@ -1,9 +1,8 @@
 class Client < ActiveRecord::Base
+  include Addressable
 
-
-  attr_accessible :name
+  attr_accessible :name, :description
 
   has_and_belongs_to_many :paths
-
 
 end

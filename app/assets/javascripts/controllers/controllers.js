@@ -88,28 +88,6 @@ angular.module('myApp.controllers', ['templates'])
       zoom: 8
     };
 
-
-    $scope.showPaths = function() {
-      var modalInstance = $modal.open({
-      templateUrl: 'paths.html',
-      controller: 'PathsCtrl',
-      size: 'lg',
-      resolve: {
-          items: function () {
-            return $scope.items;
-          }
-        }
-      });
-
-      modalInstance.result.then(function (selectedItem) {
-        $scope.selected = selectedItem;
-      }, function () {
-        $log.info('Modal dismissed at: ' + new Date());
-      });
-
-    }
-
-/*
     $scope.showClients = function() {
       var modalInstance = $modal.open({
       templateUrl: 'clients.html',
@@ -129,7 +107,6 @@ angular.module('myApp.controllers', ['templates'])
       });
 
     }
-*/
 
   }
 ])

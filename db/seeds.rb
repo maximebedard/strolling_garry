@@ -6,12 +6,12 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+admin = User.create(email:'admin@admin.com', password: 'bob12345', password_confirmation: 'bob12345')
 
 (1..20).each do |n|
-  path = Path.create(name: "Chemin #{n}")
+  admin.paths << Path.create(name: "Chemin #{n}")
+end
 
-  (1..10).each do |m|
-    path.clients << Client.create(name: "Client #{n}-#{m}")
-  end
-
+(1..10).each do |n|
+  admin.clients << Client.create(name: "Client #{n}")
 end

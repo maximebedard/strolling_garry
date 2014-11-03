@@ -1,5 +1,9 @@
 class User < ActiveRecord::Base
 
+
+  has_many :clients
+  has_many :paths
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

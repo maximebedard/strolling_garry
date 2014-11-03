@@ -1,3 +1,8 @@
 class Waypoint < ActiveRecord::Base
-  # attr_accessible :title, :body
+  include Addressable
+
+  attr_accessible :name, :description
+
+  belongs_to :path
+
 end

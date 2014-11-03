@@ -8,24 +8,24 @@
 </div>
 <div class="modal-body">
 
-  <table class="table table-bordered">
-    <tr>
-      <th>Name</th>
-      <th># Waypoints</th>
-      <th># Clients</th>
-      <th>Distance</th>
-      <th>Time</th>
-    </tr>
+  <div class="container">
+    <div class="row">
+    <d
 
-    <tr ng-repeat="path in paths" ng-class="{ success: path.active }">
-      <td>{{ path.name }}</td>
-      <td>{{ path.waypoints.length }}</td>
-      <td>{{ path.clients.length }}</td>
-      <td>{{ path.distance }}</td>
-      <td>{{ path.time }}</td>
-    </tr>
+      <div ng-repead="client in clients" class="client col-md-6">
 
-  </table>
+        <address>
+          <strong>{{ client.name }}</strong><br>
+          {{ client.address.number }} {{ client.address.street }} <br>
+          {{ client.address.city }}, {{ client.address.country }} {{ client.address.postal_code }}
+        </address>
+
+      </div>
+
+    </div>
+  </div>
+
+
 
 </div>
 <div class="modal-footer">

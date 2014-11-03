@@ -14,18 +14,22 @@
 ActiveRecord::Schema.define(:version => 20141024142752) do
 
   create_table "addresses", :force => true do |t|
+    t.integer  "addressable_id"
+    t.string   "addressable_type"
     t.integer  "number"
     t.string   "street"
     t.string   "city"
     t.string   "province"
+    t.string   "country"
     t.string   "postal_code"
     t.float    "latitude"
     t.float    "longitude"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "clients", :force => true do |t|
+    t.integer  "user_id"
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -37,6 +41,7 @@ ActiveRecord::Schema.define(:version => 20141024142752) do
   end
 
   create_table "paths", :force => true do |t|
+    t.integer  "user_id"
     t.string   "name"
     t.string   "mode"
     t.datetime "created_at", :null => false

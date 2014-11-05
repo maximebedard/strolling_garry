@@ -3,6 +3,6 @@ class Waypoint < ActiveRecord::Base
 
   attr_accessible :name, :description
 
-  belongs_to :path
+  has_and_belongs_to_many :path
 
 end

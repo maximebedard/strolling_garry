@@ -2,8 +2,22 @@ require 'rails_helper'
 
 RSpec.describe Path, :type => :model do
 
-  pending "creates a path with no name"
+  pending "is invalid without a name"
 
-  pending "creates a path with many clients and waypoints"
+  it "has many waypoints" do
+    path = create :path
+    path.waypoints << create(:waypoint)
+  end
+
+  it "has many clients" do
+    path = create :path
+    path.clients << create(:client)
+  end
+
+  it "has many branches" do
+    path = create :path
+    path.branches << create(:branch)
+
+  end
 
 end

@@ -1,8 +1,9 @@
 class CreateWaypoints < ActiveRecord::Migration
   def change
     create_table :waypoints do |t|
+      t.string :type
       t.integer :user_id
-      t.integer :path_id
+      #t.integer :path_id
       t.string :name
       t.string :description
       t.integer :elevation

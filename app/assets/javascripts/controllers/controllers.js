@@ -4,41 +4,29 @@ angular.module('myApp.controllers', ['templates'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider
-    .when('/paths/new', {
-      templateUrl: 'path.html',
-      controller: 'NewPathCtrl'
-    })
     .when('/paths/:id', {
       templateUrl: 'path.html',
       controller: 'PathCtrl'
     });
 }])
 
-.controller('NewPathCtrl', ['$scope', '$log', '$routeParams', '$location', 'Path',
-  function($scope, $log, $routeParams, $location, Path){
-    $scope.path = new Path();
-
-    $scope.save = function() {
-      $scope.path.$save(function(path){
-        $location.path('/paths/' + path.id);
-      });
-    }
-
-    $scope.create = function() {
-      $location.path('/paths/new');
-    }
-  }
-])
-
-
 .controller('PathCtrl', ['$scope', '$log', '$routeParams', '$location', 'Path',
   function($scope, $log, $routeParams, $location, Path) {
 
-    $scope.path = Path.get({ id:$routeParams.id });
+    if($routeParams.id === 'new')
+      $scope.path = new Path();
+    else
+      $scope.path = Path.get({ id:$routeParams.id });
 
     $scope.save = function() {
       $log.log($scope.path);
-      $scope.path.$update();
+      if($routeParams.id === 'new') {
+        $scope.path.$save(function(path){
+          $location.path('/paths/' + path.id);
+        });
+      }
+      else
+        $scope.path.$update();
     }
 
     $scope.create = function() {

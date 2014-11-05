@@ -50,22 +50,13 @@
     </div>
 
 
-    <div class="form-group">
+    <div class="btn-group">
 
+      <label class="btn btn-primary" ng-model="path.mode" btn-radio="'car'"><i class="fa fa-car"></i></label>
+      <label class="btn btn-primary" ng-model="path.mode" btn-radio="'bus'"><i class="fa fa-bus"></i></label>
+      <label class="btn btn-primary" ng-model="path.mode" btn-radio="'bicycle'"><i class="fa fa-bicycle"></i></label>
+      <label class="btn btn-primary" ng-model="path.mode" btn-radio="'male'"><i class="fa fa-male"></i></label>
 
-          <input type="radio" ng-model="path.mode" value="car"><i class="fa fa-car"></i>
-
-
-          <input type="radio" ng-model="path.mode" value="bus"><i class="fa fa-bus"></i>
-
-
-          <input type="radio" ng-model="path.mode" value="bicycle"><i class="fa fa-bicycle"></i>
-
-
-          <input type="radio" ng-model="path.mode" value="walk"><i class="fa fa-male"></i>
-
-
-      
     </div>
 
     <div>Waypoints : {{ path.waypoints.length }}</div>

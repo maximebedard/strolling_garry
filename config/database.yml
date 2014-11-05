@@ -26,3 +26,4 @@ production:
   username: wqmmfotelyllmv
   password: n5Hf-b7Hc77EkQhtiT9Z9cNzB-
   host: ec2-54-163-249-168.compute-1.amazonaws.com
+  port: 5432

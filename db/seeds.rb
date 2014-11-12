@@ -6,12 +6,22 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-admin = User.create(email:'admin@admin.com', password: 'bob12345', password_confirmation: 'bob12345')
+admin = User.create(email:'admin@admin.com',
+  password: 'bob12345', password_confirmation: 'bob12345')
 
-(1..20).each do |n|
-  admin.paths << Path.create(name: "Chemin #{n}")
-end
+path1 = Path.create(name: 'Route 1', mode:'car')
 
-(1..10).each do |n|
-  admin.clients << Client.create(name: "Client #{n}")
-end
+
+path1.waypoints = [
+             Waypoint.create(name:'Waypoint 1', description:'',
+              address:Address.create(number:66, street: 'Racine', city: 'Pincourt', postal_code:'J7V 8E9')),
+             Waypoint.create(name:'Waypoint 2', description:'',
+              address:Address.create(number:1100, street: 'Notre-Dame Ouest', city: 'Montreal', postal_code:'H3C 1K3')),
+             Waypoint.create(name:'Waypoint 3', description:'',
+               address:Address.create(number:1909, street: 'Avenue des Canadiens-de-Montreal', city: 'Montreal', postal_code:'H4B 5G0')),
+             Waypoint.create(name:'Waypoint 4', description:'',
+               address:Address.create(number:4141, street: 'Avenue Pierre-de Coubertin', city: 'Montreal', postal_code:'H1V 3N7')),
+            ]
+
+
+admin.paths << path1

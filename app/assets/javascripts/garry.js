@@ -1,6 +1,11 @@
 
 'use strict';
 
+$('body').tooltip({
+  selector: '[data-toggle=tooltip]',
+  container: 'body'
+});
+
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
   'google-maps'.ns(),

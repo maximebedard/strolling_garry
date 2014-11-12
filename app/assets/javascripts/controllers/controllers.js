@@ -40,23 +40,68 @@ angular.module('myApp.controllers', ['templates'])
       controller: 'PathsCtrl',
       size: 'lg',
       resolve: {
-          selectedPath: function () {
-            return $scope.path;
+          currentPathId: function () {
+            return $scope.path.id;
           }
         }
       });
 
-      modalInstance.result.then(function (selectedItem) {
-        $scope.selected = selectedItem;
-      }, function () {
-        $log.info('Modal dismissed at: ' + new Date());
-      });
+      modalInstance.result.then(
+        function (selectedPathId) {
+          //$log.log(selectedPathId);
+          //$location.path('/path/' + selectedPathId);
+
+          //if(!$scope.$$phase) $scope.$apply()
+        },
+        function () {
+          $log.info('Modal dismissed at: ' + new Date());
+        });
 
     }
 
     $scope.isCollapsed = true;
 
-    $('.path_details_content').perfectScrollbar();
+
+
+
+
+
+
+    $scope.today = function() {
+      $scope.dt = new Date();
+    }
+    $scope.today();
+
+    $scope.clear = function () {
+      $scope.dt = null;
+    }
+
+    // Disable weekend selection
+    $scope.disabled = function(date, mode) {
+      return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+    }
+
+    $scope.toggleMin = function() {
+      $scope.minDate = $scope.minDate ? null : new Date();
+    }
+    $scope.toggleMin();
+
+    $scope.open = function($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+      $scope.opened = true;
+    }
+
+    $('.path_details_wrapper > .scrollpane').perfectScrollbar();
+    $('#branch').selectize({
+      create: true,
+      sortField: 'text'
+    });
+    $('#path_type').selectize({
+      create: true,
+      sortField: 'text'
+    });
+
 
     /*
     $scope.onWaypointDropComplete = function (index, obj, evt) {
@@ -77,10 +122,31 @@ angular.module('myApp.controllers', ['templates'])
   }
 ])
 
-.controller('PathsCtrl', ['$scope', '$log', '$modalInstance', 'Path',
-  function($scope, $log, $modalInstance, Path){
+.controller('PathsCtrl', ['$scope', '$log', '$modalInstance', 'Path', 'currentPathId',
+  function($scope, $log, $modalInstance, Path, currentPathId){
 
     $scope.paths = Path.query();
+
+    $scope.setSelectedPathId = function(pathId){
+      if($scope.selectedPathId === pathId){
+        $scope.selectedPathId = null;
+        return;
+      }
+
+      $scope.selectedPathId = pathId;
+    }
+    $scope.setSelectedPathId(currentPathId);
+
+    $scope.create = function(){
+      // close the dialog and send null will redirect to new
+      $modalInstance.close('new');
+    }
+
+    $scope.load = function(pathId) {
+      // close the dialog and send the selected path
+      //$modalInstance.close(pathId);
+      
+    }
 
     $scope.close = function(){
       $modalInstance.dismiss('cancel');
@@ -104,7 +170,7 @@ angular.module('myApp.controllers', ['templates'])
         latitude: 45.536482,
         longitude: -73.592702
       },
-      zoom: 8
+      zoom: 11
     };
 
   }

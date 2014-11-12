@@ -6,8 +6,8 @@ class CreateAddresses < ActiveRecord::Migration
       t.integer :number
       t.string :street
       t.string :city
-      t.string :province
-      t.string :country
+      t.string :province, default: 'Quebec'
+      t.string :country, default: 'Canada'
       t.string :postal_code
       t.float :latitude
       t.float :longitude

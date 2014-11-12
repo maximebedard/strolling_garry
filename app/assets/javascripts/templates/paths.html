@@ -23,8 +23,7 @@
       <tr class="animate"
         ng-repeat="path in paths"
         ng-class="{ success: selectedPathId === path.id }"
-        ng-click="setSelected(path.id)">
-
+        ng-click="setSelectedPathId(path.id)">
         <td>
           {{ path.name }}
           <div class="pull-right">
@@ -49,10 +48,13 @@
 
 </div>
 <div class="modal-footer">
-  <button class="btn btn-primary" ng-click="create()">
-    <i class="fa fa-plus"></i> Create new
-  </button>
   <button class="btn btn-danger" ng-click="close()">
     <i class="fa fa-times"></i> Close
+  </button>
+  <button class="btn btn-primary" ng-click="create()">
+    <i class="glyphicon glyphicon-share-alt"></i> Create new
+  </button>
+  <button class="btn btn-success" ng-class="{disabled: !selectedPathId }" ng-click="load(selectedPathId)">
+    <i class="glyphicon glyphicon-share-alt"></i> Load selected
   </button>
 </div>

@@ -18,6 +18,7 @@
 //= require angular-resource/angular-resource
 //= require angular-route/angular-route
 //= require bootstrap/dist/js/bootstrap
+//= require selectize/dist/js/standalone/selectize.min
 //= require angular-rails-templates
 //= require perfect-scrollbar/min/perfect-scrollbar.min
 //= require lodash/dist/lodash

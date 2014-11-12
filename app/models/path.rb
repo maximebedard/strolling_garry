@@ -8,12 +8,8 @@ class Path < ActiveRecord::Base
 
   belongs_to :user
 
-  def as_json
-    super(:name, :mode, :clients, :waypoints)
-  end
-
-  def total_distance
-
+  def as_json(options = {})
+    super({ include: [:waypoints, :clients] }.merge(options))
   end
 
 end

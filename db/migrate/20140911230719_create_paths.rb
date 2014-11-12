@@ -4,6 +4,7 @@ class CreatePaths < ActiveRecord::Migration
       t.integer :user_id
       t.string :name
       t.string :mode
+      t.float :distance
       t.timestamps
     end
 

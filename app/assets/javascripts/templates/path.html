@@ -1,9 +1,9 @@
 <div>
 <form class="form" role="form">
 
-  <div class="path">
-
-      <button type="button" class="btn btn-default"
+  <div class="path_toolbar">
+      <button type="button" class="btn btn-default" data-toggle="tooltip"
+        data-placement="bottom" title="Click to show the current path details"
         ng-click="isCollapsed = !isCollapsed">
         <span class="glyphicon glyphicon-chevron-down"></span>
       </button>
@@ -34,67 +34,99 @@
           ng-click="save()">
           <i class="fa fa-save"></i>
         </button>
-
       </div>
-
-
   </div>
 
-  <div class="path_details" collapse="isCollapsed">
-    <div class="path_details_content">
+  <div class="path_details_wrapper" collapse="isCollapsed">
+    <div class="scrollpane">
+      <div>
+
+        <div class="path_details">
 
 
 
-    <h4>Path details</h4>
-    <div class="form-group">
-      <input type="text" ng-model="path.name" class="form-control" placeholder="Path name..." />
-    </div>
+          <h4>Path details <span class="badge" ng-show="!path.id">NEW</span></h4>
+
+          <div class="form-group">
+            <input type="text" ng-model="path.name" class="form-control" placeholder="Path name..." />
+          </div>
+
+          <div class="form-group">
+            <select id="branch" class="selectized" placeholder="Select a starting branch">
+              <option>a</option>
+              <option>b</option>
+              <option>c</option>
+              <option>d</option>
+              <option>e</option>
+              <option>f</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <select id="path_type" class="selectized" placeholder="Select a path type">
+              <option>Delivery</option>
+              <option>Marketing</option>
+            </select>
+          </div>
+
+          <p class="input-group">
+            <input type="text" class="form-control" datepicker-popup="dd-MMMM-yyyy" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+          </p>
 
 
-    <div class="btn-group">
+          <div class="btn-group">
 
-      <label class="btn btn-primary" ng-model="path.mode" btn-radio="'car'"><i class="fa fa-car"></i></label>
-      <label class="btn btn-primary" ng-model="path.mode" btn-radio="'bus'"><i class="fa fa-bus"></i></label>
-      <label class="btn btn-primary" ng-model="path.mode" btn-radio="'bicycle'"><i class="fa fa-bicycle"></i></label>
-      <label class="btn btn-primary" ng-model="path.mode" btn-radio="'male'"><i class="fa fa-male"></i></label>
-
-    </div>
-
-    <div>Waypoints : {{ path.waypoints.length }}</div>
-    <div>Client : {{ path.clients.length }}</div>
-
-    <h4>Clients</h4>
-    <ul>
-      <li ng-repeat="client in path.clients">
-        {{ client.name }}
-      </li>
-    </ul>
-
-    <h4>Waypoints</h4>
-    <div class="draglist-container">
-      <ul class="draglist">
-        <li ng-repeat="obj in waypoints" ng-drop="true" ng-drop-success="onWaypointDropComplete($index, $data, $event)">
-          <div ng-drag="true" ng-drag-data="obj">
-
-              <form class="form-inline" role="form">
-                <span class="glyphicon glyphicon-th"></span> {{ obj.name }}
-                <div class="input-group btn-group btn-group-xs pull-right">
-                  <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Locate this waypoint on the map.">
-                    <i class="fa fa-map-marker"></i>
-                  </button>
-                  <button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Edit waypoint info.">
-                    <span class="glyphicon glyphicon-edit"></span>
-                  </button>
-                  <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Remove this waypoint.">
-                    <i class="fa fa-times"></i>
-                  </button>
-                </div>
-              </form>
+            <label class="btn btn-primary" ng-model="path.mode" btn-radio="'car'"><i class="fa fa-car"></i></label>
+            <label class="btn btn-primary" ng-model="path.mode" btn-radio="'bus'"><i class="fa fa-bus"></i></label>
+            <label class="btn btn-primary" ng-model="path.mode" btn-radio="'bicycle'"><i class="fa fa-bicycle"></i></label>
+            <label class="btn btn-primary" ng-model="path.mode" btn-radio="'male'"><i class="fa fa-male"></i></label>
 
           </div>
-        </li>
-      </ul>
-    </div>
+
+          <div>Waypoints : {{ path.waypoints.length }}</div>
+          <div>Client : {{ path.clients.length }}</div>
+
+          <h4>Clients</h4>
+          <ul>
+            <li ng-repeat="client in path.clients">
+              {{ client.name }}
+            </li>
+          </ul>
+
+          <h4>Waypoints</h4>
+
+
+  <div class="list-group">
+    <a href="#" class="list-group-item" ng-repeat="waypoint in path.waypoints">
+        <h4 class="list-group-item-heading">{{waypoint.name}}</h4>
+        <p class="list-group-item-text">{{waypoint.description}}</p>
+    </a>
+  </div>
+
+
+
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis efficitur blandit enim, vel ornare mauris convallis eu. In eu feugiat ex. Phasellus mattis mauris augue, in facilisis ante pharetra a. Nam non sapien nec arcu sollicitudin rutrum sed nec massa. Fusce id porttitor orci, id commodo tellus. Maecenas auctor turpis sed quam pharetra blandit. Aliquam erat volutpat. Vestibulum sed dictum quam. Nunc lacinia rutrum sapien vitae accumsan. Integer sed neque ornare diam blandit sodales. Etiam et diam et eros consequat tincidunt. Integer congue nisl id ligula facilisis laoreet. Fusce vitae dolor et est tincidunt efficitur.
+
+          Phasellus scelerisque est sed nulla malesuada, eu eleifend quam tristique. Pellentesque tempus dolor ac volutpat tincidunt. Pellentesque quis tristique sapien. Duis placerat nulla vitae erat laoreet mollis. Donec finibus erat ut ante placerat, vel convallis dui placerat. Praesent in luctus magna, id commodo arcu. Sed faucibus erat vel odio tempor tempus. Nulla finibus, risus sit amet placerat pretium, felis ex viverra nisl, sed pulvinar nibh ex at ante. Proin vehicula quam vel lectus pulvinar, nec fringilla est sagittis. Mauris mollis purus non risus scelerisque eleifend.
+
+          Maecenas elementum rhoncus convallis. Curabitur euismod bibendum pharetra. Pellentesque eros nulla, iaculis ut enim ac, pharetra ullamcorper ipsum. Sed in erat eu urna luctus molestie sit amet eu risus. Donec leo libero, blandit non lacus a, facilisis porta eros. Quisque sagittis eget sem vel eleifend. Pellentesque id justo quis tellus porttitor laoreet. Integer porta odio a risus euismod lobortis. Integer scelerisque diam nec tempor dapibus. Morbi eu ultrices massa, quis lobortis ex. Etiam ornare elit quam, quis porta nisl vehicula ac.
+
+          Curabitur imperdiet, diam a volutpat tincidunt, magna augue elementum dolor, sit amet bibendum nisi massa id augue. Donec tincidunt neque eu enim posuere, in venenatis augue semper. Nullam ac ipsum sed turpis eleifend cursus vel at ipsum. Donec nulla velit, elementum vitae rutrum elementum, ullamcorper nec nibh. Praesent ullamcorper lorem id sollicitudin posuere. Aenean ipsum erat, vulputate at efficitur vel, ultricies at dolor. Suspendisse auctor ac felis vitae aliquam. Aenean sagittis sapien eget viverra molestie. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla lobortis pretium ex, a suscipit lacus efficitur id. Integer vehicula odio nisi. Proin euismod diam sit amet nunc pharetra, vel porta eros posuere. Proin interdum lorem sit amet neque facilisis iaculis.
+
+          Proin suscipit, lacus eget commodo dictum, magna justo vulputate nisi, in pretium mauris sapien non orci. Vivamus vitae velit eu est suscipit faucibus. Aliquam erat volutpat. Fusce venenatis mi at mauris bibendum, in pellentesque nulla molestie. Nam id odio et erat porttitor scelerisque quis sit amet dui. Fusce pretium justo odio. Fusce maximus nibh in pulvinar egestas. Vivamus at ex et lorem malesuada hendrerit. Morbi at nisl porttitor, eleifend nulla eget, luctus ante. Curabitur vel placerat lacus. Nulla suscipit a elit eu bibendum. Etiam at enim ac lorem imperdiet tempus vel sit amet arcu. Integer volutpat sapien vitae neque ultrices eleifend.
+
+
+
+
+
+
+
+        </div>
+
+      </div>
     </div>
   </div>
 

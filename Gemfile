@@ -23,6 +23,7 @@ end
 gem 'jquery-rails'
 gem 'angular-rails-templates'
 gem 'devise'
+gem 'geocoder'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'

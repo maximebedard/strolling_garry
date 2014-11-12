@@ -31,7 +31,7 @@ class Api::PathsController < ApplicationController
   end
 
   def destroy
-    @path = current_user.find(params[:id])
+    @path = current_user.paths.find(params[:id])
     @path.destroy
     head :no_content
   end

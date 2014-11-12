@@ -9,12 +9,12 @@ FactoryGirl.define do
 
 
   factory :address do
-    number 123
-    street 'Notre-Dame'
-    city 'Montreal'
+    number 66
+    street 'Racine'
+    city 'Pincourt'
     country 'Canada'
     province 'Quebec'
-    postal_code 'J7V 8A1'
+    postal_code 'J7V 8E9'
   end
 
   factory :path do

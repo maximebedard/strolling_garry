@@ -8,4 +8,12 @@ class Path < ActiveRecord::Base
 
   belongs_to :user
 
+  def as_json
+    super(:name, :mode, :clients, :waypoints)
+  end
+
+  def total_distance
+
+  end
+
 end

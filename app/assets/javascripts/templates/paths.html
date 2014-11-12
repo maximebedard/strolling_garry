@@ -15,6 +15,7 @@
         <th>Name</th>
         <th># Waypoints</th>
         <th># Clients</th>
+        <th>Mode</th>
         <th>Distance</th>
         <th>Time</th>
       </tr>
@@ -27,9 +28,6 @@
         <td>
           {{ path.name }}
           <div class="pull-right">
-            <button class="btn btn-xs btn-info" ng-click="edit(path)">
-              <span class="glyphicon glyphicon-edit"></span>
-            </button>
             <button class="btn btn-xs btn-danger" ng-click="delete(path)">
               <i class="fa fa-times"></i>
             </button>
@@ -37,6 +35,7 @@
         </td>
         <td>{{ path.waypoints.length }}</td>
         <td>{{ path.clients.length }}</td>
+        <td><i class="fa" ng-class="'fa-'+path.mode"></i></td>
         <td>{{ path.distance }}</td>
         <td>{{ path.time }}</td>
       </tr>

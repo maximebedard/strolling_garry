@@ -1,5 +1,9 @@
 # Strolling Garry ᕕ( ᐛ )ᕗ
 
+[![Code Climate](https://codeclimate.com/github/maximebedard/strolling_garry/badges/gpa.svg)](https://codeclimate.com/github/maximebedard/strolling_garry)
+
+[![Circle CI](https://circleci.com/gh/maximebedard/strolling_garry/tree/master.png?style=badge)](https://circleci.com/gh/maximebedard/strolling_garry/tree/master)
+
 # Installation
 
 ## Windows

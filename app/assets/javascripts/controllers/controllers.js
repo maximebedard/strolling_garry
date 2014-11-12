@@ -10,8 +10,8 @@ angular.module('myApp.controllers', ['templates'])
     });
 }])
 
-.controller('PathCtrl', ['$scope', '$log', '$routeParams', '$location', 'Path',
-  function($scope, $log, $routeParams, $location, Path) {
+.controller('PathCtrl', ['$scope', '$log', '$routeParams', '$location', '$modal', 'Path',
+  function($scope, $log, $routeParams, $location, $modal, Path) {
 
     if($routeParams.id === 'new')
       $scope.path = new Path();
@@ -31,6 +31,27 @@ angular.module('myApp.controllers', ['templates'])
 
     $scope.create = function() {
       $location.path('/paths/new');
+    }
+
+    $scope.load = function() {
+
+      var modalInstance = $modal.open({
+      templateUrl: 'paths.html',
+      controller: 'PathsCtrl',
+      size: 'lg',
+      resolve: {
+          selectedPath: function () {
+            return $scope.path;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (selectedItem) {
+        $scope.selected = selectedItem;
+      }, function () {
+        $log.info('Modal dismissed at: ' + new Date());
+      });
+
     }
 
     $scope.isCollapsed = true;
@@ -56,18 +77,28 @@ angular.module('myApp.controllers', ['templates'])
   }
 ])
 
-.controller('PathsCtrl', ['$scope', '$log', 'Path',
-  function($scope, $log, Path){
+.controller('PathsCtrl', ['$scope', '$log', '$modalInstance', 'Path',
+  function($scope, $log, $modalInstance, Path){
 
     $scope.paths = Path.query();
+
+    $scope.close = function(){
+      $modalInstance.dismiss('cancel');
+    }
+
+    $scope.delete = function(path){
+      path.$delete();
+      $scope.paths.splice($scope.paths.indexOf(path), 1)
+    }
 
   }
 ])
 
 
 
-.controller('MainCtrl', ['$scope', '$log', '$modal',
+.controller('MainCtrl', ['$scope', '$log',
   function($scope, $log, $modal){
+
     $scope.map = {
       center: {
         latitude: 45.536482,
@@ -75,26 +106,6 @@ angular.module('myApp.controllers', ['templates'])
       },
       zoom: 8
     };
-
-    $scope.showClients = function() {
-      var modalInstance = $modal.open({
-      templateUrl: 'clients.html',
-      controller: 'ClientsCtrl',
-      size: 'lg',
-      resolve: {
-          items: function () {
-            return $scope.items;
-          }
-        }
-      });
-
-      modalInstance.result.then(function (selectedItem) {
-        $scope.selected = selectedItem;
-      }, function () {
-        $log.info('Modal dismissed at: ' + new Date());
-      });
-
-    }
 
   }
 ])

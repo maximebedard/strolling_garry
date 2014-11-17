@@ -1,0 +1,62 @@
+
+<h4>Path details <span class="badge" ng-show="!path.id">NEW</span><span class="badge" ng-show="pathForm.$dirty">EDITED</span></h4>
+
+<div class="form-group">
+  <input type="text" ng-model="path.name" class="form-control" placeholder="Path name..." />
+</div>
+
+<div class="form-group">
+  <select id="branch" class="selectized" placeholder="Select a starting branch">
+    <option>a</option>
+    <option>b</option>
+    <option>c</option>
+    <option>d</option>
+    <option>e</option>
+    <option>f</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <select id="path_type" class="selectized" placeholder="Select a path type">
+    <option>Delivery</option>
+    <option>Marketing</option>
+  </select>
+</div>
+
+<p class="input-group">
+  <input type="text" class="form-control" datepicker-popup="dd-MMMM-yyyy"
+    ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions"
+    ng-required="true" close-text="Close" />
+    <span class="input-group-btn">
+      <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+    </span>
+</p>
+
+
+<div class="btn-group">
+
+  <label class="btn btn-primary" ng-model="path.mode" btn-radio="'car'"><i class="fa fa-car"></i></label>
+  <label class="btn btn-primary" ng-model="path.mode" btn-radio="'bus'"><i class="fa fa-bus"></i></label>
+  <label class="btn btn-primary" ng-model="path.mode" btn-radio="'bicycle'"><i class="fa fa-bicycle"></i></label>
+  <label class="btn btn-primary" ng-model="path.mode" btn-radio="'male'"><i class="fa fa-male"></i></label>
+
+</div>
+
+<div>Waypoints : {{ path.waypoints.length }}</div>
+<div>Client : {{ path.clients.length }}</div>
+
+<h4>Clients</h4>
+<ul>
+  <li ng-repeat="client in path.clients">
+    {{ client.name }}
+  </li>
+</ul>
+
+<h4>Waypoints</h4>
+
+<div class="list-group">
+  <a href="#" class="list-group-item" ng-repeat="waypoint in path.waypoints">
+      <h4 class="list-group-item-heading">{{waypoint.name}}</h4>
+      <p class="list-group-item-text">{{waypoint.description}}</p>
+  </a>
+</div>

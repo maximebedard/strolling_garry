@@ -8,6 +8,8 @@
 </div>
 <div class="modal-body">
 
+  <div class="alert alert-warning" role="alert" ng-show="currentPathIsDirty"><strong>Warning!</strong> changes have occured on the working path. If you change the working path, the changes will not be saved.</div>
+
   <div ng-show="paths.length">
 
     <table class="table table-bordered">
@@ -42,6 +44,7 @@
     </table>
 
   </div>
+
   <div ng-hide="paths.length">
     <i>No paths... please click on the button below to create a new path.</i>
   </div>

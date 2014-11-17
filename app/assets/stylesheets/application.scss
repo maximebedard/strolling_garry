@@ -23,15 +23,12 @@ html, body{
   border-color:1px solid #efefef;
 }
 
-body{
-  margin-top:50px;
-}
-
-.content,
-.angular-google-map,
-.angular-google-map-container {
+.content {
   height: 100%;
 }
+
+.angular-google-map-container,
+.angular-google-map { height: 100%; }
 
 .path_toolbar {
   z-index:1030;
@@ -137,4 +134,9 @@ ul.draglist > li > div {
     -webkit-transition: opacity 300ms linear;
     -moz-transition: opacity 300ms linear;
     transition: opacity 300ms linear;
+}
+
+
+img[src*="gstatic.com/"], img[src*="googleapis.com/"] {
+  max-width: none;
 }

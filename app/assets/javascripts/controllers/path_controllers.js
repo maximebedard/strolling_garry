@@ -131,12 +131,6 @@ angular.module('myApp.pathControllers', ['templates'])
       $scope.opened = true;
     }
 
-
-
-    $('.path_details_wrapper > .scrollpane').perfectScrollbar();
-    $('#branch').selectize({ create: true, sortField: 'text' });
-    $('#path_type').selectize({ create: true, sortField: 'text' });
-
   }
 ])
 

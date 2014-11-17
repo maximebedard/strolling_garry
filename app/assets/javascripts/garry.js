@@ -21,7 +21,8 @@ angular.module('myApp', [
   'templates',
   'myApp.controllers',
   'myApp.services',
-  'myApp.pathControllers'
+  'myApp.pathControllers',
+  'myApp.directives'
 ])
 
 .config(['$routeProvider', function($routeProvider) {

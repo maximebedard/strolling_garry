@@ -23,6 +23,11 @@
 
       </div>
 
+      <button type="button" class="btn btn-info" data-toggle="tooltip"
+        data-placement="bottom" title="Generate the path.">
+        <i class="fa fa-flag"></i>
+      </button>
+
       <div class="btn-group pull-right">
         <button type="button" class="btn btn-success" data-toggle="tooltip"
           data-placement="bottom" title="Click to create a new path."
@@ -43,7 +48,7 @@
   </div>
 
   <div class="path_details_wrapper" collapse="isCollapsed">
-    <div class="scrollpane">
+    <div class="scrollpane" perfect-scrollbar>
       <div>
 
         <div class="path_details" ng-include="'pathdetails.html'"></div>

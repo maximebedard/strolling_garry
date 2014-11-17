@@ -46,16 +46,18 @@
 <div>Client : {{ path.clients.length }}</div>
 
 <h4>Clients</h4>
-<ul>
-  <li ng-repeat="client in path.clients">
-    {{ client.name }}
-  </li>
-</ul>
+
+<div class="list-group">
+  <a class="list-group-item" ng-repeat="client in path.clients" ng-click="panTo(client)">
+      <h4 class="list-group-item-heading">{{client.name}}</h4>
+      <p class="list-group-item-text">{{client.description}}</p>
+  </a>
+</div>
 
 <h4>Waypoints</h4>
 
 <div class="list-group">
-  <a href="#" class="list-group-item" ng-repeat="waypoint in path.waypoints">
+  <a class="list-group-item" ng-repeat="waypoint in path.waypoints" ng-click="panTo(waypoint)">
       <h4 class="list-group-item-heading">{{waypoint.name}}</h4>
       <p class="list-group-item-text">{{waypoint.description}}</p>
   </a>

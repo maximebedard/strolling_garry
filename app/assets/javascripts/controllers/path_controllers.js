@@ -11,6 +11,28 @@ angular.module('myApp.pathControllers', ['templates'])
 .controller('PathCtrl', ['$scope', '$log', '$routeParams', '$location', '$modal', 'Path',
   function($scope, $log, $routeParams, $location, $modal, Path) {
 
+
+
+    function offsetCenter(map, latlng, offsetx, offsety) {
+      var scale = Math.pow(2, map.getZoom());
+      var nw = new google.maps.LatLng(
+          map.getBounds().getNorthEast().lat(),
+          map.getBounds().getSouthWest().lng()
+      );
+
+      var worldCoordinateCenter = map.getProjection().fromLatLngToPoint(latlng);
+      var pixelOffset = new google.maps.Point((offsetx/scale) || 0,(offsety/scale) ||0)
+
+      var worldCoordinateNewCenter = new google.maps.Point(
+          worldCoordinateCenter.x - pixelOffset.x,
+          worldCoordinateCenter.y + pixelOffset.y
+      );
+
+      var newCenter = map.getProjection().fromPointToLatLng(worldCoordinateNewCenter);
+
+      map.setCenter(newCenter);
+    }
+
     // Default adding mode
     $scope.markerType = 'waypoint';
 
@@ -49,8 +71,7 @@ angular.module('myApp.pathControllers', ['templates'])
       $scope.currentMarkerLat = marker.getPosition().lat();
       $scope.currentMarkerLng = marker.getPosition().lng();
       $scope.myInfoWindow.open($scope.myMap, marker);
-      // TODO Center click and set offset http://stackoverflow.com/questions/10656743/how-to-offset-the-center-point-in-google-maps-api-v3
-      $scope.myMap.panTo(marker.getPosition());
+      offsetCenter($scope.myMap, marker.getPosition(), 0, -100);
     };
 
     $scope.closeInfoMarkerWindow = function(){

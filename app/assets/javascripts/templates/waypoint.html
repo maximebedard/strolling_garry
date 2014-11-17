@@ -32,10 +32,13 @@
 
   <div class="form-group">
     <div class="row">
-      <div class="col-sm-12">
+      <div class="col-sm-6">
+        <button class="btn btn-danger" ng-click="destroy(currentMarker)">Delete</button>
+      </div>
+      <div class="col-sm-6">
         <div class="pull-right">
           <button class="btn btn-primary" ng-click="setMarkerPosition(currentMarker, currentMarkerLat, currentMarkerLng)">Save</button>
-          <button class="btn btn-danger" ng-click="closeInfoMarkerWindow()">Cancel</button>
+          <button class="btn btn-warning" ng-click="closeInfoMarkerWindow()">Cancel</button>
         </div>
       </div>
     </div>

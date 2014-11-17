@@ -1,50 +1,44 @@
-<div>
+<form name="myForm" style="padding-bottom:10px;">
 
-  <form name="myForm" ng-controller="MarkerCtrl">
+  <h4>Editing waypoint</h4>
 
-    <h4>Editing waypoint</h4>
+  <div class="form-group">
+    <div class="row">
+      <div class="col-sm-12">
+        <input type="text" placeholder="Name" class="form-control" />
+      </div>
+    </div>
+  </div>
 
-    {{ markerInfo.latitude }}
 
-    <div class="form-group">
-      <div class="row">
-        <div class="col-sm-12">
-          <input type="text" placeholder="Name" class="form-control" />
+  <div class="form-group">
+    <div class="row">
+      <div class="col-sm-12">
+        <textarea class="form-control"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col-sm-6">
+        <input type="text" placeholder="Latitude" class="form-control" ng-model="currentMarkerLat">
+      </div>
+      <div class="col-sm-6">
+        <input type="text" placeholder="Longitude" class="form-control" ng-model="currentMarkerLng">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="pull-right">
+          <button class="btn btn-primary" ng-click="setMarkerPosition(currentMarker, currentMarkerLat, currentMarkerLng)">Save</button>
+          <button class="btn btn-danger" ng-click="closeInfoMarkerWindow()">Cancel</button>
         </div>
       </div>
     </div>
+  </div>
 
-
-    <div class="form-group">
-      <div class="row">
-        <div class="col-sm-12">
-          <textarea class="form-control"></textarea>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <div class="row">
-        <div class="col-sm-6">
-          <input type="text" placeholder="Latitude" class="form-control" ng-model="markerInfo.latitude">
-        </div>
-        <div class="col-sm-6">
-          <input type="text" placeholder="Longitude" class="form-control" ng-model="markerInfo.longitude">
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="pull-right">
-            <button class="btn btn-primary" ng-click="save()">Save</button>
-            <button class="btn btn-danger" ng-click="close()">Cancel</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </form>
-
-</div>
+</form>

@@ -22,8 +22,9 @@
 //= require angular-rails-templates
 //= require perfect-scrollbar/min/perfect-scrollbar.min
 //= require lodash/dist/lodash
-//= require angular-google-maps/dist/angular-google-maps
 //= require angular-bootstrap/ui-bootstrap-tpls
+//= require angular-ui-utils/ui-utils.min
+//= require angular-ui-map/ui-map.min
 //= require ngDraggable/ngDraggable
 //= require garry
 //= require_tree ./templates

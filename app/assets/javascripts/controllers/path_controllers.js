@@ -25,69 +25,37 @@ angular.module('myApp.pathControllers', ['templates'])
       $scope.path = Path.get({ id:$routeParams.id });
     }
 
-  $scope.markers = [];
-    $scope.path.markers = [];
+    $scope.myMarkers = [];
 
-
-    // Setup the map
-    $scope.map = {
-      center: { latitude: 45.536482, longitude: -73.592702 },
+    $scope.mapOptions = {
+      center: new google.maps.LatLng(45.536482, -73.592702),
       zoom: 10,
-      events: {
-        click: function(event) {
-          // Add marker to the map
-          $log.log(event.latLng);
-
-          $scope.markers.push({id:0, options:{ draggable:true }, coords:{latitude:event.latLng().lat(), longitude: event.latLng().lng()}});
-          $log.log($scope.markers);
-
-        }
-      }
+      mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
-    //var infoWindow = new google.maps.InfoWindow({
-    //  maxWidth:600
-    //});
+    $scope.infoWindowOptions = {
+      maxHeight: 300
+    };
 
-    //google.maps.event.addListener(Map.getMap(), 'click', function(event) {
-    //  $scope.addMarker(event.latLng, $scope.markerType);
-    //});
+    $scope.addMarker = function($event, $params) {
+      $scope.myMarkers.push(new google.maps.Marker({
+        map: $scope.myMap,
+        position: $params[0].latLng
+      }));
+    };
 
-    //$scope.addMarker = function(location, markerType){
+    $scope.openMarkerInfo = function(marker) {
+      $scope.currentMarker = marker;
+      $scope.currentMarkerLat = marker.getPosition().lat();
+      $scope.currentMarkerLng = marker.getPosition().lng();
+      $scope.myInfoWindow.open($scope.myMap, marker);
+      // TODO Center click and set offset http://stackoverflow.com/questions/10656743/how-to-offset-the-center-point-in-google-maps-api-v3
+      $scope.myMap.panTo(marker.getPosition());
+    };
 
-      //$log.log('adding ' + markerType);
-
-      //var markerInfo = new Waypoint();
-      //markerInfo.type = markerType
-      //markerInfo.longitude = location.lng();
-      //markerInfo.latitude = location.lat();
-
-      //var marker = new google.maps.Marker({
-      //  position: location,
-      //  map: Map.getMap(),
-      //  draggable: true
-      //});
-
-
-      //google.maps.event.addListener(marker, 'click',
-      //  (function(marker, scope, markerInfo) {
-      //    return function(){
-
-      //      scope.markerInfo = markerInfo;
-      //      scope.infoWindow = infoWindow;
-
-      //      var content = $templateCache.get(markerInfo.type + '.html');
-      //      var compiled = $compile(content)($scope);
-
-      //      //scope.$apply();
-
-      //      infoWindow.setOptions({content: compiled[0].innerHTML});
-      //      infoWindow.open(Map.getMap(), marker);
-
-      //    }
-      //  })(marker, $scope, markerInfo)
-      //);
-    //}
+    $scope.closeInfoMarkerWindow = function(){
+      $scope.myInfoWindow.close();
+    }
 
     // Path toolbar operations
     $scope.save = function() {
@@ -150,19 +118,6 @@ angular.module('myApp.pathControllers', ['templates'])
 
   }
 ])
-
-.controller('MarkerCtrl', ['$log', '$scope', function($log, $scope){
-
-  $log.log($scope.markerInfo);
-
-  $scope.close = function(){
-    $log.log('closing');
-  }
-
-  $scope.save = function(){
-    $log.log('save');
-  }
-}])
 
 .controller('PathsCtrl', ['$scope', '$log', '$modalInstance', '$location', 'Path', 'currentPathIsDirty', 'currentPathId',
   function($scope, $log, $modalInstance, $location, Path, currentPathIsDirty, currentPathId){

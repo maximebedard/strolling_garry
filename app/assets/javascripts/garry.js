@@ -6,38 +6,23 @@ $('body').tooltip({
   container: 'body'
 });
 
+function initCall() {
+  console.log('Google maps api initialized.');
+  angular.bootstrap(document.getElementById('body'), ['doc.ui-map']);
+}
+
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
-  'google-maps'.ns(),
   'ngDraggable',
   'ngResource',
   'ngRoute',
   'ui.bootstrap',
+  'ui.map',
   'templates',
   'myApp.controllers',
   'myApp.services',
   'myApp.pathControllers'
 ])
-
-//.config(['GoogleMapApiProvider'.ns(), function (GoogleMapApi) {
-//  GoogleMapApi.configure({
-//      key: 'AIzaSyD28wyczXQXdz2WOEi7lI46-BAGiMidNb0',
-//      v: '3.17',
-//      libraries: 'weather,geometry,visualization'
-//  });
-//}])
-
-
-.config(['GoogleMapApiProvider'.ns(), function (GoogleMapApi) {
-  GoogleMapApi.configure({
-      key: 'AIzaSyD28wyczXQXdz2WOEi7lI46-BAGiMidNb0',
-      v: '3.17',
-      libraries: 'weather,geometry,visualization'
-  });
-}])
-
-//.run(['$rootScope', function($rootScope){
-//}])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/paths/new'});

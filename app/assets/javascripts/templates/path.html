@@ -54,8 +54,27 @@
 
 </form>
 
+<!-- this is the confusing part. we have to point the map marker directive
+  at an existing google.maps.Marker object, so it can hook up events -->
+<div ng-repeat="marker in myMarkers" ui-map-marker="myMarkers[$index]"
+  ui-event="{'map-click': 'openMarkerInfo(marker)'}">
+</div>
+
+<div ui-map-info-window="myInfoWindow" ui-options="infoWindowOptions">
+
+  <div ng-include="'waypoint.html'"></div>
 
 
+</div>
+
+<!-- Giving the div an id="map_canvas" fix problems with twitter bootstrap affecting
+google maps -->
+<div id="map_canvas" ui-map="myMap" class="map"
+  ui-event="{'map-click': 'addMarker($event, $params)', 'map-zoom_changed': 'setZoomMessage(myMap.getZoom())' }"
+  ui-options="mapOptions">
+</div>
+
+<!--
 <ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events">
 
 
@@ -64,3 +83,4 @@
 
 
 </ui-gmap-google-map>
+-->

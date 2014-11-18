@@ -11,8 +11,6 @@ angular.module('myApp.pathControllers', ['templates'])
 .controller('PathCtrl', ['$scope', '$log', '$routeParams', '$location', '$modal', 'Path',
   function($scope, $log, $routeParams, $location, $modal, Path) {
 
-
-
     function offsetCenter(map, latlng, offsetx, offsety) {
       var scale = Math.pow(2, map.getZoom());
       var nw = new google.maps.LatLng(
@@ -71,7 +69,7 @@ angular.module('myApp.pathControllers', ['templates'])
       $scope.currentMarkerLat = marker.getPosition().lat();
       $scope.currentMarkerLng = marker.getPosition().lng();
       $scope.myInfoWindow.open($scope.myMap, marker);
-      offsetCenter($scope.myMap, marker.getPosition(), 0, -100);
+      offsetCenter($scope.myMap, marker.getPosition(), 0, -175);
     };
 
     $scope.closeInfoMarkerWindow = function(){
@@ -112,24 +110,29 @@ angular.module('myApp.pathControllers', ['templates'])
 
     // Path date picker
     $scope.today = function() {
-      $scope.dt = new Date();
-    }
+      $scope.path.date = new Date();
+    };
     $scope.today();
 
     $scope.clear = function () {
-      $scope.dt = null;
-    }
+      $scope.path.date = null;
+    };
 
     $scope.toggleMin = function() {
       $scope.minDate = $scope.minDate ? null : new Date();
-    }
+    };
     $scope.toggleMin();
 
-    $scope.open = function($event) {
+    $scope.open = function($event, obj) {
       $event.preventDefault();
       $event.stopPropagation();
-      $scope.opened = true;
-    }
+      $scope.path[obj] = !$scope.path[obj];
+    };
+
+    $scope.dateOptions = {
+      formatYear: 'yy',
+      startingDay: 1
+    };
 
   }
 ])

@@ -1,13 +1,15 @@
-<h4>Path details <span class="badge" ng-show="!path.id">NEW</span><span class="badge" ng-show="pathForm.$dirty">EDITED</span></h4>
+<h4>Path details <span class="badge" ng-show="!path.id">NEW</span><span class="badge" ng-show="path.id && pathForm.$dirty">EDITED</span></h4>
 
 <div class="form-group">
-  <input type="text" ng-model="path.name" class="form-control" placeholder="Path name..." />
+  <label for="pathName">Path name</label>
+  <input type="text" id="pathName" ng-model="path.name" class="form-control" placeholder="Path name..." />
 </div>
 
 <div class="row">
   <div class="col-sm-6">
     <div class="form-group">
-      <select id="branch" class="selectized" selectize placeholder="Select a starting branch">
+      <label for="branch">Starting branch</label>
+      <select id="branch" selectize placeholder="Select a starting branch">
         <option>a</option>
         <option>b</option>
         <option>c</option>
@@ -20,9 +22,10 @@
 
   <div class="col-sm-6">
     <div class="form-group">
-      <select id="path_type" class="selectized" selectize placeholder="Select a path type">
-        <option>Delivery</option>
-        <option>Marketing</option>
+      <label for="pathType">Path type</label>
+      <select id="pathType" selectize placeholder="Select a path type" ng-model="path.path_type">
+        <option value="delivery">Delivery</option>
+        <option value="marketing">Marketing</option>
       </select>
     </div>
   </div>
@@ -31,29 +34,36 @@
 
 <div class="row">
   <div class="col-sm-6">
-    <p class="input-group">
-      <input type="text" class="form-control" datepicker-popup="dd-MMMM-yyyy" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+
+    <label for="date">Path projected date</label>
+    <div class="input-group">
+      <input type="text" id="date" class="form-control" datepicker-popup="{{format}}"
+        ng-model="path.date" is-open="path.dateOpened" min-date="minDate"
+        max-date="'2015-06-22'" datepicker-options="dateOptions"
+        ng-required="true" close-text="Close">
       <span class="input-group-btn">
-          <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-        </span>
-    </p>
+        <button type="button" class="btn btn-default" ng-click="open($event, 'dateOpened')"><i class="glyphicon glyphicon-calendar"></i></button>
+      </span>
+    </div>
+
   </div>
   <div class="col-sm-6">
-    <div class="btn-group">
-
-      <label class="btn btn-primary" ng-model="path.mode" btn-radio="'car'">
-        <i class="fa fa-car"></i>
-      </label>
-      <label class="btn btn-primary" ng-model="path.mode" btn-radio="'bus'">
-        <i class="fa fa-bus"></i>
-      </label>
-      <label class="btn btn-primary" ng-model="path.mode" btn-radio="'bicycle'">
-        <i class="fa fa-bicycle"></i>
-      </label>
-      <label class="btn btn-primary" ng-model="path.mode" btn-radio="'male'">
-        <i class="fa fa-male"></i>
-      </label>
-
+    <label>Mode</label>
+    <div class="form-group">
+      <div class="btn-group">
+        <label class="btn btn-primary" ng-model="path.mode" btn-radio="'car'">
+          <i class="fa fa-car"></i>
+        </label>
+        <label class="btn btn-primary" ng-model="path.mode" btn-radio="'bus'">
+          <i class="fa fa-bus"></i>
+        </label>
+        <label class="btn btn-primary" ng-model="path.mode" btn-radio="'bicycle'">
+          <i class="fa fa-bicycle"></i>
+        </label>
+        <label class="btn btn-primary" ng-model="path.mode" btn-radio="'male'">
+          <i class="fa fa-male"></i>
+        </label>
+      </div>
     </div>
   </div>
 </div>

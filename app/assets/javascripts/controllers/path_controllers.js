@@ -8,8 +8,8 @@ angular.module('myApp.pathControllers', ['templates'])
     });
 }])
 
-.controller('PathCtrl', ['$scope', '$log', '$routeParams', '$location', '$modal', 'Path',
-  function($scope, $log, $routeParams, $location, $modal, Path) {
+.controller('PathCtrl', ['$scope', '$log', '$routeParams', '$location', '$modal', '$timeout', 'Path',
+  function($scope, $log, $routeParams, $location, $modal, $timeout, Path) {
 
     function offsetCenter(map, latlng, offsetx, offsety) {
       var scale = Math.pow(2, map.getZoom());
@@ -61,6 +61,25 @@ angular.module('myApp.pathControllers', ['templates'])
       $scope.path = Path.get({ id:$routeParams.id });
     }
 
+    // alerts
+    //$scope.alerts = [
+    //  { type: 'danger', msg: 'Oh snap! Change a few things up and try submitting again.' },
+    //  { type: 'success', msg: 'Well done! You successfully read this important alert message.' }
+    //];
+
+    $scope.addAlert = function() {
+      $scope.alerts.push({msg: 'Another alert!'});
+    };
+
+    $scope.closeAlert = function(index) {
+      $scope.alerts.splice(index, 1);
+    };
+
+    $timeout(function(){
+      $scope.alerts.shift();
+    }, 100);
+
+    // Markers
     $scope.myMarkers = [];
 
     $scope.mapOptions = {

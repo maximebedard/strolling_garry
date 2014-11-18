@@ -78,13 +78,8 @@ google maps -->
   ui-options="mapOptions">
 </div>
 
-<!--
-<ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events">
 
 
-  <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
-  </ui-gmap-marker>
-
-
-</ui-gmap-google-map>
--->
+<div class="alert-box">
+  <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+</div>

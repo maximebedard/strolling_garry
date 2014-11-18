@@ -20,6 +20,7 @@ FactoryGirl.define do
   factory :path do
     name 'Test path'
     mode 'car'
+    path_type 'delivery'
   end
 
   factory :waypoint do

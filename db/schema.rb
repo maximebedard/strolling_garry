@@ -19,21 +19,25 @@ ActiveRecord::Schema.define(:version => 20141024142752) do
     t.integer  "number"
     t.string   "street"
     t.string   "city"
-    t.string   "province"
-    t.string   "country"
+    t.string   "province",         :default => "Quebec"
+    t.string   "country",          :default => "Canada"
     t.string   "postal_code"
     t.float    "latitude"
     t.float    "longitude"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
   end
 
   create_table "paths", :force => true do |t|
     t.integer  "user_id"
+    t.string   "path_type"
     t.string   "name"
-    t.string   "mode"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "mode",          :default => "car"
+    t.date     "date"
+    t.float    "distance"
+    t.time     "distance_time"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
 
   create_table "paths_waypoints", :id => false, :force => true do |t|

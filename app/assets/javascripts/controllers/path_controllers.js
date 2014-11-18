@@ -34,6 +34,22 @@ angular.module('myApp.pathControllers', ['templates'])
     // Default adding mode
     $scope.markerType = 'waypoint';
 
+    // Add path types
+    $scope.pathTypes = [
+      { name:'Delivery', value:'delivery' },
+      { name:'Marketing', value:'marketing' }
+    ];
+
+    // Add branches
+    $scope.branches = [
+      { name:'A', value:'a' },
+      { name:'B', value:'b' },
+      { name:'C', value:'c' },
+      { name:'D', value:'d' },
+      { name:'E', value:'e' },
+      { name:'F', value:'f' }
+    ];
+
     // Path display mode
     $scope.isCollapsed = true;
 
@@ -69,7 +85,7 @@ angular.module('myApp.pathControllers', ['templates'])
       $scope.currentMarkerLat = marker.getPosition().lat();
       $scope.currentMarkerLng = marker.getPosition().lng();
       $scope.myInfoWindow.open($scope.myMap, marker);
-      offsetCenter($scope.myMap, marker.getPosition(), 0, -175);
+      offsetCenter($scope.myMap, marker.getPosition(), 0, -200);
     };
 
     $scope.closeInfoMarkerWindow = function(){

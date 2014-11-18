@@ -9,7 +9,7 @@
 admin = User.create(email:'admin@admin.com',
   password: 'bob12345', password_confirmation: 'bob12345')
 
-path1 = Path.create(name: 'Route 1', mode:'car')
+path1 = Path.create(name: 'Route 1', mode:'car', path_type: 'delivery')
 
 
 path1.waypoints = [

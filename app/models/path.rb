@@ -13,7 +13,7 @@ class Path < ActiveRecord::Base
   # Validations
   validates :name, presence:true
   validates :mode, presence:true
-  validates :path_type, inclusion: { in: %w(delivery marketing)}, presence:true
+  validates :path_type, inclusion: { in: %w(delivery marketing) }
 
 
   def as_json(options = {})

@@ -5,7 +5,7 @@ class CreatePaths < ActiveRecord::Migration
       t.string :path_type
       t.string :name
       t.string :mode, default: 'car'
-      t.date :date,
+      t.date :date
       t.float :distance
       t.time :distance_time
       t.timestamps

@@ -18,13 +18,14 @@
 //= require angular-resource/angular-resource
 //= require angular-route/angular-route
 //= require bootstrap/dist/js/bootstrap
-//= require selectize/dist/js/standalone/selectize.min
 //= require angular-rails-templates
 //= require perfect-scrollbar/min/perfect-scrollbar.min
 //= require lodash/dist/lodash
 //= require angular-bootstrap/ui-bootstrap-tpls
 //= require angular-ui-utils/ui-utils.min
 //= require angular-ui-map/ui-map.min
+//= require angular-sanitize/angular-sanitize
+//= require angular-ui-select/dist/select
 //= require ngDraggable/ngDraggable
 //= require garry
 //= require_tree ./templates

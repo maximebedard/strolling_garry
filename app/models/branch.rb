@@ -1,4 +1,4 @@
-class Branch < Waypoint
+class Branch < ActiveRecord::Base
   include Addressable
 
   attr_accessible :name, :description

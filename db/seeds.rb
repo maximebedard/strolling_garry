@@ -23,5 +23,11 @@ path1.waypoints = [
                address:Address.create(number:4141, street: 'Avenue Pierre-de Coubertin', city: 'Montreal', postal_code:'H1V 3N7')),
             ]
 
-
 admin.paths << path1
+
+Branch.create(name: 'Branch 1', description:'',
+  address:Address.create(number:66, street: 'Racine', city: 'Pincourt', postal_code:'J7V 8E9'))
+Branch.create(name: 'Branch 2', description:'',
+  address:Address.create(number:1100, street: 'Notre-Dame Ouest', city: 'Montreal', postal_code:'H3C 1K3'))
+Branch.create(name: 'Branch 3', description:'',
+  address:Address.create(number:1909, street: 'Avenue des Canadiens-de-Montreal', city: 'Montreal', postal_code:'H4B 5G0'))

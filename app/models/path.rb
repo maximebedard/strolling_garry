@@ -1,7 +1,7 @@
 class Path < ActiveRecord::Base
 
   # Attributes
-  attr_accessible :name, :mode, :date, :distance, :distance_time, :path_type
+  attr_accessible :name, :mode, :date, :distance, :distance_time, :path_type, :branch_id, :waypoints, :clients
 
   # Relations
   has_many :waypoints
@@ -15,7 +15,7 @@ class Path < ActiveRecord::Base
   validates :path_type, inclusion: { in: %w(delivery marketing) }
 
   def as_json(options = {})
-    super({ include: [:waypoints, :clients] }.merge(options))
+    super({ include: [:waypoints, :clients, :branch] }.merge(options))
   end
 
 end

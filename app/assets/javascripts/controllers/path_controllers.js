@@ -8,8 +8,8 @@ angular.module('myApp.pathControllers', ['templates'])
     });
 }])
 
-.controller('PathCtrl', ['$scope', '$log', '$routeParams', '$location', '$modal', '$timeout', 'Path',
-  function($scope, $log, $routeParams, $location, $modal, $timeout, Path) {
+.controller('PathCtrl', ['$scope', '$log', '$routeParams', '$location', '$modal', '$timeout', 'Path', 'Branch',
+  function($scope, $log, $routeParams, $location, $modal, $timeout, Path, Branch) {
 
     function offsetCenter(map, latlng, offsetx, offsety) {
       var scale = Math.pow(2, map.getZoom());
@@ -41,14 +41,7 @@ angular.module('myApp.pathControllers', ['templates'])
     ];
 
     // Add branches
-    $scope.branches = [
-      { name:'A', value:'a' },
-      { name:'B', value:'b' },
-      { name:'C', value:'c' },
-      { name:'D', value:'d' },
-      { name:'E', value:'e' },
-      { name:'F', value:'f' }
-    ];
+    $scope.branches = Branch.query();
 
     // Path display mode
     $scope.isCollapsed = true;
@@ -61,12 +54,6 @@ angular.module('myApp.pathControllers', ['templates'])
       $scope.path = Path.get({ id:$routeParams.id });
     }
 
-    // alerts
-    //$scope.alerts = [
-    //  { type: 'danger', msg: 'Oh snap! Change a few things up and try submitting again.' },
-    //  { type: 'success', msg: 'Well done! You successfully read this important alert message.' }
-    //];
-
     $scope.addAlert = function() {
       $scope.alerts.push({msg: 'Another alert!'});
     };
@@ -75,9 +62,9 @@ angular.module('myApp.pathControllers', ['templates'])
       $scope.alerts.splice(index, 1);
     };
 
-    $timeout(function(){
-      $scope.alerts.shift();
-    }, 100);
+    //$timeout(function(){
+    //  $scope.alerts.shift();
+    //}, 100);
 
     // Markers
     $scope.myMarkers = [];

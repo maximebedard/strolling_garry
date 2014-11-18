@@ -9,9 +9,9 @@
   <div class="col-sm-6">
     <div class="form-group">
 
-      <ui-select ng-model="path.branch">
+      <ui-select ng-model="path.branch_id">
         <ui-select-match placeholder="Select the starting branch...">{{$select.selected.name}}</ui-select-match>
-        <ui-select-choices repeat="branch in branches | filter: $select.search">
+        <ui-select-choices repeat="branch.id as branch in branches | filter: $select.search">
           <span ng-bind-html="branch.name | highlight: $select.search"></span>
         </ui-select-choices>
       </ui-select>

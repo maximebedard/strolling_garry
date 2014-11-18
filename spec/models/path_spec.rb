@@ -14,9 +14,9 @@ RSpec.describe Path, :type => :model do
     path.clients << create(:client)
   end
 
-  it "has many branches" do
+  it "has on starting branch" do
     path = create :path
-    path.branches << create(:branch)
+    path.branch = create(:branch)
 
   end
 

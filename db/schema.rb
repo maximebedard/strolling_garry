@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141024142752) do
+ActiveRecord::Schema.define(:version => 20141118203300) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "addressable_id"
@@ -28,8 +28,31 @@ ActiveRecord::Schema.define(:version => 20141024142752) do
     t.datetime "updated_at",                             :null => false
   end
 
+  create_table "branches", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "elevation"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "clients", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "description"
+    t.integer  "elevation"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "clients_paths", :id => false, :force => true do |t|
+    t.integer "path_id"
+    t.integer "client_id"
+  end
+
   create_table "paths", :force => true do |t|
     t.integer  "user_id"
+    t.integer  "branch_id"
     t.string   "path_type"
     t.string   "name"
     t.string   "mode",          :default => "car"
@@ -38,11 +61,6 @@ ActiveRecord::Schema.define(:version => 20141024142752) do
     t.time     "distance_time"
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
-  end
-
-  create_table "paths_waypoints", :id => false, :force => true do |t|
-    t.integer "path_id"
-    t.integer "waypoint_id"
   end
 
   create_table "users", :force => true do |t|
@@ -66,8 +84,8 @@ ActiveRecord::Schema.define(:version => 20141024142752) do
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
   create_table "waypoints", :force => true do |t|
-    t.string   "type"
     t.integer  "user_id"
+    t.integer  "path_id"
     t.string   "name"
     t.string   "description"
     t.integer  "elevation"

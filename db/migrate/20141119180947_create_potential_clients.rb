@@ -1,7 +1,6 @@
 class CreatePotentialClients < ActiveRecord::Migration
   def change
     create_table :potential_clients do |t|
-      t.integer :user_id
       t.string :name
       t.string :description
       t.integer :time_spent  # En minutes

@@ -37,7 +37,6 @@ ActiveRecord::Schema.define(:version => 20141119205804) do
   end
 
   create_table "clients", :force => true do |t|
-    t.integer  "user_id"
     t.string   "name"
     t.string   "description"
     t.integer  "estimated_delivery_time"
@@ -70,7 +69,6 @@ ActiveRecord::Schema.define(:version => 20141119205804) do
   end
 
   create_table "potential_clients", :force => true do |t|
-    t.integer  "user_id"
     t.string   "name"
     t.string   "description"
     t.integer  "time_spent"

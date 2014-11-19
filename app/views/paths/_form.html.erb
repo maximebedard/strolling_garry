@@ -11,13 +11,15 @@
   <div class="row">
     <div class="col-sm-6">
       <div class="form-group">
-        <%= f.select :branch_id, Branch.all.map {|p| [p.name,p.id]} %>
+        <%= f.label :branch_id %>
+        <%= f.select :branch_id, Branch.all.collect {|p| [p.name,p.id]}, {}, { class: 'form-control' } %>
       </div>
     </div>
 
     <div class="col-sm-6">
       <div class="form-group">
-        <%= f.select :mode, ['delivery', 'marketing'] %>
+        <%= f.label :path_type %>
+        <%= f.select :path_type, ['delivery', 'marketing'], {}, { class: 'form-control' } %>
       </div>
     </div>
   </div>
@@ -31,7 +33,6 @@
     </div>
     <div class="col-sm-6">
       <div class="form-group">
-      
         <div class="btn-group" data-toggle="buttons">
           <label class="btn btn-primary">
             <%= f.radio_button :mode, 'car' %><i class="fa fa-car"></i>

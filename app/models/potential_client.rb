@@ -1,3 +1,3 @@
-class PotentialClient < Client
-  
+class PotentialClient < ActiveRecord::Base
+  include Addressable
 end

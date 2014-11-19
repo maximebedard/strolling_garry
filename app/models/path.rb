@@ -8,7 +8,7 @@ class Path < ActiveRecord::Base
   # Relations
   has_many :waypoints
   has_and_belongs_to_many :clients
-  has_and_belongs_to_many :potential_clients, association_foreign_key: 'client_id', join_table: 'clients_paths'
+  has_and_belongs_to_many :potential_clients
   belongs_to :branch
   belongs_to :user
 

@@ -31,19 +31,20 @@
     </div>
     <div class="col-sm-6">
       <div class="form-group">
-        <label>Mode</label>
-        <div class="btn-group">
-          <label class="btn btn-primary" btn-radio="'car'">
-            <i class="fa fa-car"></i>
+      
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-primary">
+            <%= f.radio_button :mode, 'car' %><i class="fa fa-car"></i>
           </label>
-          <label class="btn btn-primary" btn-radio="'bus'">
-            <i class="fa fa-bus"></i>
+          <label class="btn btn-primary">
+            <%= f.radio_button :mode, 'bus' %><i class="fa fa-bus"></i>
           </label>
-          <label class="btn btn-primary" btn-radio="'bicycle'">
-            <i class="fa fa-bicycle"></i>
+
+          <label class="btn btn-primary">
+            <%= f.radio_button :mode, 'bicycle' %><i class="fa fa-bicycle"></i>
           </label>
-          <label class="btn btn-primary" btn-radio="'male'">
-            <i class="fa fa-male"></i>
+          <label class="btn btn-primary">
+            <%= f.radio_button :mode, 'male' %><i class="fa fa-male"></i>
           </label>
         </div>
       </div>

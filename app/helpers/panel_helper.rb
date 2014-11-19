@@ -35,7 +35,7 @@ module PanelHelper
 
     return if record.errors.empty?
 
-    "<div class='alert alert-warning alert-dismissible' role='alert'>
+    "<div class='alert alert-danger alert-dismissible' role='alert'>
       <button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button>
       <ul>
        #{record.errors.full_messages.collect {|msg| "<li>#{msg}</li>"}.join()}

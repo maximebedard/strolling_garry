@@ -38,4 +38,9 @@ FactoryGirl.define do
     description 'This is a test branch'
   end
 
+  factory :potential_client do
+    name 'Test client potentiel'
+    description 'this is a test potential client'
+  end
+
 end

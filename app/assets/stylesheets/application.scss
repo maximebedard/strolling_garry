@@ -9,143 +9,24 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require bootstrap/dist/css/bootstrap
- *= require font-awesome/css/font-awesome
- *= require angular-ui-select/dist/select
- *= require perfect-scrollbar/min/perfect-scrollbar.min
  *= require_self
  */
 
-html, body{
-  height:100%;
-}
-
-.client {
-  border-color:1px solid #efefef;
-}
-
-.content {
-  height: 100%;
-}
-
-.map { height: 100%; }
 
 
-.path_toolbar {
-  z-index:1030;
-  position:fixed;
-  top:0px;
-  left:90px;
-  width:503px;
-
-  padding:8px 20px 8px 20px;
-  background-color:#f8f8f8;
-  border:1px solid #e7e7e7;
-  border-top:none;
-}
-
-.path_details_wrapper {
-  z-index:1030;
-  position: fixed;
-  top:51px;
-  left:90px;
-  width:503px;
-
-  background-color:rgba(248, 248, 248, 0.8);
-  border:1px solid #e7e7e7;
-  border-top:none;
-
-  .scrollpane{
-    position:relative;
-    height:300px;
-    overflow:hidden;
-  }
-}
-.path_details {
-  padding:10px 20px 10px 20px;
-
+body{
+  background: image-url('bg.png') no-repeat center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 
-/* Drag&Drop list begin */
-ul.draglist {
-  text-align:center;
-  list-style: none;
-  padding:0;
-}
-
-ul.draglist > li {
-  margin-top:1px;
-  display:block;
-}
-
-ul.draglist > li > div {
-  padding:4px;
-  border:1px solid #e7e7e7;
-  display:inline-table;
-  text-align:left;
-  width:350px;
-  background-color:#FFF;
-}
-
-[ng-drag] {
-    -moz-user-select: -moz-none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-
-[ng-drag].drag-over {
-    border-bottom: solid 1px red;
-}
-
-[ng-drag].dragging {
-    opacity: 0.5;
-}
-
-[ng-drop].drag-enter {
-    border-bottom: solid 1px red;
-}
-/* Drag&Drop list end */
-
-
-.modal-body {
-  background: #f8f8f8 image-url('swirl_pattern.png');
-}
-
-.modal-content {
-  background-color: #f8f8f8;
-}
-
-/* Add animation */
-.animate.ng-enter.ng-enter-active,
-.animate.ng-leave {
-    opacity: 1;
-    -webkit-transition: opacity 300ms linear;
-    -moz-transition: opacity 300ms linear;
-    transition: opacity 300ms linear;
-}
-
-/* Remove animation */
-.animate.ng-leave.ng-leave-active,
-.animate.ng-enter {
-    opacity: 0;
-    -webkit-transition: opacity 300ms linear;
-    -moz-transition: opacity 300ms linear;
-    transition: opacity 300ms linear;
-}
-
-
-img[src*="gstatic.com/"], img[src*="googleapis.com/"] {
-  max-width: none;
-}
-
-.alert-box{
-  position: absolute;
-  width: 500px;
-  top: 75px;
-  left: 50%;
-  margin-left: -250px;
-  z-index:1040;
+.logo {
+  padding: 70px 25px 70px 25px;
+  display: inline-block;
+  background-color: #FFF;
+  border-radius: 115px;
+  border: #E7E7E7;
 }

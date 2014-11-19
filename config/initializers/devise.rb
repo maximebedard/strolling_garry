@@ -260,10 +260,10 @@ end
 
 
 # https://github.com/plataformatec/devise/wiki/How-To:-Create-custom-layouts
-Rails.application.config.to_prepare do
-  Devise::SessionsController.layout "devise"
-  Devise::RegistrationsController.layout "devise"
-  Devise::ConfirmationsController.layout "devise"
-  Devise::UnlocksController.layout "devise"
-  Devise::PasswordsController.layout "devise"
-end
+#Rails.application.config.to_prepare do
+#  Devise::SessionsController.layout "devise"
+#  Devise::RegistrationsController.layout "devise"
+#  Devise::ConfirmationsController.layout "devise"
+#  Devise::UnlocksController.layout "devise"
+#  Devise::PasswordsController.layout "devise"
+#end

@@ -1,14 +1,10 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
-<head>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LOG330</title>
+  <title>StrollingGarry</title>
   <%= stylesheet_link_tag "application", :media => "all" %>
   <%= yield :styles %>
   <%= csrf_meta_tags %>
@@ -24,11 +20,22 @@
 
 </head>
 <body>
-  
-  <%= yield %>
-
-  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD28wyczXQXdz2WOEi7lI46-BAGiMidNb0"></script>
+  <div class="container">
+    <div class="row">
+      <div class="col-span12 text-center">
+        <h1 class="logo">ᕕ( ᐛ )ᕗ</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-span12 text-center">
+        <%= render 'partials/flashes' %>
+      </div>
+    </div>
+    <div class="row">
+      <%= yield %>
+    </div>
+  </div>
   <%= javascript_include_tag "application" %>
-  <%= yield :body_scripts %>
+  <%= yield :scripts %>
 </body>
 </html>

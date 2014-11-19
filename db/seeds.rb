@@ -9,6 +9,8 @@
 admin = User.create(email:'admin@admin.com',
   password: 'bob12345', password_confirmation: 'bob12345')
 
+admin.toggle!(:admin)
+
 path1 = Path.create(name: 'Route 1', mode:'car', path_type: 'delivery')
 
 

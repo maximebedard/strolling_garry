@@ -15,3 +15,4 @@
 /tmp
 
 /vendor/assets/bower_components
+.idea/

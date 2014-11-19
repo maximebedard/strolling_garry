@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141118203300) do
+ActiveRecord::Schema.define(:version => 20141119180947) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "addressable_id"
@@ -38,12 +38,12 @@ ActiveRecord::Schema.define(:version => 20141118203300) do
 
   create_table "clients", :force => true do |t|
     t.integer  "user_id"
-    t.string   "client_type"
     t.string   "name"
     t.string   "description"
-    t.integer  "elevation"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer  "estimated_delivery_time"
+    t.string   "delivery_item"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
   end
 
   create_table "clients_paths", :id => false, :force => true do |t|
@@ -62,6 +62,17 @@ ActiveRecord::Schema.define(:version => 20141118203300) do
     t.time     "distance_time"
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
+  end
+
+  create_table "potential_clients", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "description"
+    t.integer  "time_spent"
+    t.string   "marketing_agent_name"
+    t.string   "decision"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
   end
 
   create_table "users", :force => true do |t|

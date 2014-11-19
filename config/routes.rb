@@ -5,6 +5,7 @@ StrollingGarry::Application.routes.draw do
   namespace :api, defaults: { format: 'json' } do
     resources :paths
     resources :branches
+    resources :waypoints
   end
 
 

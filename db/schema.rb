@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(:version => 20141118203300) do
 
   create_table "clients", :force => true do |t|
     t.integer  "user_id"
+    t.string   "client_type"
     t.string   "name"
     t.string   "description"
     t.integer  "elevation"

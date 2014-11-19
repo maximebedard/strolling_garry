@@ -27,6 +27,10 @@ angular.module('myApp', [
   'myApp.directives'
 ])
 
+.config(["railsSerializerProvider", function(railsSerializerProvider) {
+    railsSerializerProvider.underscore(angular.identity).camelize(angular.identity);
+}])
+
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/paths/new'});
 }]);

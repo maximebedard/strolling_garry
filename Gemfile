@@ -22,8 +22,10 @@ end
 
 gem 'jquery-rails'
 gem 'angular-rails-templates'
+gem 'angularjs-rails-resource', '~> 1.1.1'
 gem 'devise'
 gem 'geocoder'
+gem 'inherited_resources'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'

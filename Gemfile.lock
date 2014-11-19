@@ -32,6 +32,7 @@ GEM
       railties (>= 3.1)
       sprockets
       tilt
+    angularjs-rails-resource (1.1.1)
     arel (3.0.3)
     bcrypt (3.1.9)
     builder (3.0.4)
@@ -58,8 +59,16 @@ GEM
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
     geocoder (1.2.6)
+    has_scope (0.6.0.rc)
+      actionpack (>= 3.2, < 5)
+      activesupport (>= 3.2, < 5)
     hike (1.2.3)
     i18n (0.6.11)
+    inherited_resources (1.5.1)
+      actionpack (>= 3.2, < 4.2)
+      has_scope (~> 0.6.0.rc)
+      railties (>= 3.2, < 4.2)
+      responders (~> 1.0)
     journey (1.0.4)
     jquery-rails (3.1.2)
       railties (>= 3.0, < 5.0)
@@ -150,10 +159,12 @@ PLATFORMS
 
 DEPENDENCIES
   angular-rails-templates
+  angularjs-rails-resource (~> 1.1.1)
   coffee-rails (~> 3.2.1)
   devise
   factory_girl_rails
   geocoder
+  inherited_resources
   jquery-rails
   pg
   rails (= 3.2.19)

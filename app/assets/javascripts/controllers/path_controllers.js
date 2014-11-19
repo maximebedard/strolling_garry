@@ -8,8 +8,8 @@ angular.module('myApp.pathControllers', ['templates'])
     });
 }])
 
-.controller('PathCtrl', ['$scope', '$log', '$routeParams', '$location', '$modal', '$timeout', 'Path', 'Branch',
-  function($scope, $log, $routeParams, $location, $modal, $timeout, Path, Branch) {
+.controller('PathCtrl', ['$scope', '$log', '$routeParams', '$location', '$modal', '$timeout', 'Path', 'Branch', 'Waypoint',
+  function($scope, $log, $routeParams, $location, $modal, $timeout, Path, Branch, Waypoint) {
 
     function offsetCenter(map, latlng, offsetx, offsety) {
       var scale = Math.pow(2, map.getZoom());
@@ -31,6 +31,7 @@ angular.module('myApp.pathControllers', ['templates'])
       map.setCenter(newCenter);
     }
 
+
     // Default adding mode
     $scope.markerType = 'waypoint';
 
@@ -41,7 +42,9 @@ angular.module('myApp.pathControllers', ['templates'])
     ];
 
     // Add branches
-    $scope.branches = Branch.query();
+    Branch.query().then(function(branches){
+      $scope.branches = branches;
+    });
 
     // Path display mode
     $scope.isCollapsed = true;
@@ -51,20 +54,11 @@ angular.module('myApp.pathControllers', ['templates'])
       $scope.path = new Path();
     }
     else{
-      $scope.path = Path.get({ id:$routeParams.id });
+      Path.get({id:$routeParams.id}).then(function(path){
+        $scope.path = path;
+        $log.log(path);
+      });
     }
-
-    $scope.addAlert = function() {
-      $scope.alerts.push({msg: 'Another alert!'});
-    };
-
-    $scope.closeAlert = function(index) {
-      $scope.alerts.splice(index, 1);
-    };
-
-    //$timeout(function(){
-    //  $scope.alerts.shift();
-    //}, 100);
 
     // Markers
     $scope.myMarkers = [];
@@ -79,14 +73,49 @@ angular.module('myApp.pathControllers', ['templates'])
       maxHeight: 300
     };
 
-    $scope.addMarker = function($event, $params) {
-      $scope.myMarkers.push(new google.maps.Marker({
-        map: $scope.myMap,
-        position: $params[0].latLng
-      }));
+    // Hack to enable datepicker toggle
+    // see openDatePicker
+    $scope.date = {};
+
+
+    $scope.addAlert = function() {
+      $scope.alerts.push({msg: 'Another alert!'});
     };
 
+    $scope.closeAlert = function(index) {
+      $scope.alerts.splice(index, 1);
+    };
+
+
+    $scope.addMarker = function($event, $params) {
+
+      var waypoint = new Waypoint({
+        latitude: $params[0].latLng.lat(),
+        longitude: $params[0].latLng.lng(),
+      });
+
+      var marker = new google.maps.Marker({
+        map: $scope.myMap,
+        position: $params[0].latLng
+      });
+
+      $scope.myMarkers.push(marker);
+
+      // 2 ways association
+      waypoint.marker = marker;
+      marker.waypoint = waypoint;
+
+      $log.log(waypoint);
+
+    };
+
+    $scope.loadMarker = function(){
+      // TODO load existing markers
+    }
+
     $scope.openMarkerInfo = function(marker) {
+
+      $log.log(marker);
       $scope.currentMarker = marker;
       $scope.currentMarkerLat = marker.getPosition().lat();
       $scope.currentMarkerLng = marker.getPosition().lng();
@@ -99,22 +128,17 @@ angular.module('myApp.pathControllers', ['templates'])
     }
 
     // Path toolbar operations
-    $scope.save = function() {
-      $log.log($scope.path);
-      if($routeParams.id === 'new') {
-        $scope.path.$save(function(path){
-          $location.path('/paths/' + path.id);
-        });
-      }
-      else
-        $scope.path.$update();
+    $scope.savePath = function() {
+      $scope.path.save().then(function(path){
+        $location.path('/paths/' + path.id);
+      })
     }
 
-    $scope.create = function() {
+    $scope.createPath = function() {
       $location.path('/paths/new');
     }
 
-    $scope.load = function() {
+    $scope.loadPath = function() {
       $modal.open({
         templateUrl: 'paths.html',
         controller: 'PathsCtrl',
@@ -134,7 +158,6 @@ angular.module('myApp.pathControllers', ['templates'])
     $scope.today = function() {
       $scope.path.date = new Date();
     };
-    $scope.today();
 
     $scope.clear = function () {
       $scope.path.date = null;
@@ -145,10 +168,10 @@ angular.module('myApp.pathControllers', ['templates'])
     };
     $scope.toggleMin();
 
-    $scope.open = function($event, obj) {
+    $scope.openDatePicker = function($event, obj) {
       $event.preventDefault();
       $event.stopPropagation();
-      $scope.path[obj] = !$scope.path[obj];
+      $scope.date[obj] = !$scope.date[obj];
     };
 
     $scope.dateOptions = {
@@ -162,9 +185,6 @@ angular.module('myApp.pathControllers', ['templates'])
 .controller('PathsCtrl', ['$scope', '$log', '$modalInstance', '$location', 'Path', 'currentPathIsDirty', 'currentPathId',
   function($scope, $log, $modalInstance, $location, Path, currentPathIsDirty, currentPathId){
 
-    $scope.paths = Path.query();
-    $scope.currentPathIsDirty = currentPathIsDirty;
-
     $scope.setSelectedPathId = function(pathId){
       if($scope.selectedPathId === pathId){
         $scope.selectedPathId = null;
@@ -173,7 +193,6 @@ angular.module('myApp.pathControllers', ['templates'])
 
       $scope.selectedPathId = pathId;
     }
-    $scope.setSelectedPathId(currentPathId);
 
     $scope.create = function(){
       $location.path("/paths/new");
@@ -194,5 +213,12 @@ angular.module('myApp.pathControllers', ['templates'])
       $scope.paths.splice($scope.paths.indexOf(path), 1)
     }
 
+    Path.query().then(function(paths){
+      $scope.paths = paths;
+
+      // TODO check this
+      $scope.setSelectedPathId(currentPathId);
+    });
+    $scope.currentPathIsDirty = currentPathIsDirty;
   }
 ])

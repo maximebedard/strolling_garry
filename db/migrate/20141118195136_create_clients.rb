@@ -3,6 +3,7 @@ class CreateClients < ActiveRecord::Migration
   def change
     create_table :clients do |t|
       t.integer :user_id
+      t.string :client_type
       t.string :name
       t.string :description
       t.integer :elevation

@@ -27,6 +27,7 @@
 //= require angular-sanitize/angular-sanitize
 //= require angular-ui-select/dist/select
 //= require ngDraggable/ngDraggable
+//= require angularjs/rails/resource
 //= require garry
 //= require_tree ./templates
 //= require_tree ./modules

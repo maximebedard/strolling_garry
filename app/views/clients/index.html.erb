@@ -20,9 +20,9 @@
           <td><%= client.estimated_delivery_time %></td>
           <td><%= client.delivery_item %></td>
           <td>
-            <button class="btn btn-xs btn-danger">
-              <i class="fa fa-times"></i>
-            </button>
+            <%= glyph_to :check, client %>
+            <%= glyph_to :edit, edit_client_path(client) %>
+            <%= glyph_to :remove_circle, client, method: :delete, data: { confirm: 'Are you sure?' } %>
           </td>
         </tr>
         <% end %>

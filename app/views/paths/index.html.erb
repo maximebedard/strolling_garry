@@ -2,7 +2,36 @@
 <%= panel_for title: 'My paths', size: 12 do %>
   <div class="panel-body">
 
-    
+    <% if @paths.length > 0 %>
+      <table class="table table-bordered">
+        <tr>
+          <th>Name</th>
+          <th># Waypoints</th>
+          <th># Clients</th>
+          <th>Mode</th>
+          <th>Distance</th>
+          <th>Actions</th>
+        </tr>
+        <% @paths.each do |path| %>
+        <tr>
+          <td><%= path.name %></td>
+          <td><%= path.waypoints.length %></td>
+          <td><%= path.clients.length %></td>
+          <td><i class="fa" ng-class="'fa-'+path.mode"></i></td>
+          <td><%= path.distance %></td>
+          <td>
+            <button class="btn btn-xs btn-danger">
+              <i class="fa fa-times"></i>
+            </button>
+          </td>
+        </tr>
+        <% end %>
+      </table>
+    <% end %>
+
+    <% if @paths.length == 0 %>
+      <p>No paths... please click on the button below to create a new path.</p>
+    <% end %>
 
   </div>
 

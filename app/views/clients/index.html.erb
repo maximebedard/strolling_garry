@@ -1,0 +1,41 @@
+
+<%= panel_for title: 'My clients', size: 12 do %>
+  <div class="panel-body">
+
+    <% if @clients.length > 0 %>
+      <table class="table table-bordered">
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Address</th>
+          <th>Estimated Delivery Time</th>
+          <th>Delivery Item</th>
+          <th>Actions</th>
+        </tr>
+        <% @clients.each do |client| %>
+        <tr>
+          <td><%= client.name %></td>
+          <td><%= client.description %></td>
+          <td><%= render partial: "address", locals: { adresse: client.address} %></td>
+          <td><%= client.estimated_delivery_time %></td>
+          <td><%= client.delivery_item %></td>
+          <td>
+            <button class="btn btn-xs btn-danger">
+              <i class="fa fa-times"></i>
+            </button>
+          </td>
+        </tr>
+        <% end %>
+      </table>
+    <% end %>
+
+    <% if @clients.length == 0 %>
+      <p>No clients... please click on the button below to create a new client.</p>
+    <% end %>
+
+  </div>
+
+  <div class="panel-footer text-right">
+    <%= link_to 'Add client', new_client_path, class: 'btn btn-primary' %>
+  </div>
+<% end %>

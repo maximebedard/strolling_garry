@@ -3,6 +3,8 @@ StrollingGarry::Application.routes.draw do
   root :to => 'paths#index'
 
   resources :paths
+  resources :clients
+  resources :potential_clients
 
   devise_for :users
 

@@ -1,0 +1,57 @@
+<%= errors_for @path %>
+
+
+<%= form_for @path do |f| %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, placeholder: 'name',  class: 'form-control' %>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= f.select :branch_id, Branch.all.map {|p| [p.name,p.id]} %>
+      </div>
+    </div>
+
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= f.select :mode, ['delivery', 'marketing'] %>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= f.text_field :date, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label>Mode</label>
+        <div class="btn-group">
+          <label class="btn btn-primary" btn-radio="'car'">
+            <i class="fa fa-car"></i>
+          </label>
+          <label class="btn btn-primary" btn-radio="'bus'">
+            <i class="fa fa-bus"></i>
+          </label>
+          <label class="btn btn-primary" btn-radio="'bicycle'">
+            <i class="fa fa-bicycle"></i>
+          </label>
+          <label class="btn btn-primary" btn-radio="'male'">
+            <i class="fa fa-male"></i>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <%= f.submit class: "btn btn-lg btn-primary btn-block" %>
+
+<% end %>

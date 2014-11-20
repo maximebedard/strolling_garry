@@ -33,3 +33,7 @@ Branch.create(name: 'Branch 2', description:'',
   address:Address.create(number:1100, street: 'Notre-Dame Ouest', city: 'Montreal', postal_code:'H3C 1K3'))
 Branch.create(name: 'Branch 3', description:'',
   address:Address.create(number:1909, street: 'Avenue des Canadiens-de-Montreal', city: 'Montreal', postal_code:'H4B 5G0'))
+
+(1..10).each do |i|
+  Client.create(name: "Client #{i}", description: "This is a description", estimated_delivery_time: i)
+end

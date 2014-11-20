@@ -33,20 +33,12 @@
     </div>
     <div class="col-sm-6">
       <div class="form-group">
-        <div class="btn-group" data-toggle="buttons">
-          <label class="btn btn-primary">
-            <%= f.radio_button :mode, 'car' %><i class="fa fa-car"></i>
-          </label>
-          <label class="btn btn-primary">
-            <%= f.radio_button :mode, 'bus' %><i class="fa fa-bus"></i>
-          </label>
-
-          <label class="btn btn-primary">
-            <%= f.radio_button :mode, 'bicycle' %><i class="fa fa-bicycle"></i>
-          </label>
-          <label class="btn btn-primary">
-            <%= f.radio_button :mode, 'male' %><i class="fa fa-male"></i>
-          </label>
+        <div class="btn-group btn-group-justified" data-toggle="buttons">
+          <% %w(car bus bicycle male).each do |id| %>
+            <%= f.label :mode, class: "btn btn-primary" do %>
+              <%= f.radio_button :mode, id %><i class="fa fa-<%= id %>"></i>
+            <% end %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -54,6 +46,7 @@
 
 
   <div class="row">
+
     <div class="col-sm-offset-1 col-sm-10">
     <h4>Clients to the path <small>(<%= link_to "Add client", new_client_path %>)</small></h4>
 

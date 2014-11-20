@@ -44,7 +44,7 @@ class PathsController < ApplicationController
   # POST /paths
   # POST /paths.json
   def create
-    @path = Path.new(params[:path])
+    @path = Path.new(path_params)
 
     respond_to do |format|
       if @path.save
@@ -63,7 +63,7 @@ class PathsController < ApplicationController
     @path = Path.find(params[:id])
 
     respond_to do |format|
-      if @path.update_attributes(params[:path])
+      if @path.update_attributes(path_params)
         format.html { redirect_to @path, notice: 'Path was successfully updated.' }
         format.json { head :no_content }
       else
@@ -83,6 +83,12 @@ class PathsController < ApplicationController
       format.html { redirect_to paths_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def path_params
+    params.require(:path).permit(:name, :mode, :date, :distance, :distance_time, :path_type, :branch_id)
   end
 
 

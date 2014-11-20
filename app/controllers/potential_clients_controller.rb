@@ -61,4 +61,10 @@ class PotentialClientsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+
+    def potential_client_params
+      params.require(:potential_client).permit(:name, :description)
+    end
 end

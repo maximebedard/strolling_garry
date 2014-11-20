@@ -25,7 +25,7 @@ class ClientsController < ApplicationController
   end
 
   def create
-    @client = Client.new(params[:client])
+    @client = Client.new(client_params)
 
     respond_to do |format|
       if @client.save
@@ -42,7 +42,7 @@ class ClientsController < ApplicationController
     @client = Client.find(params[:id])
 
     respond_to do |format|
-      if @client.update_attributes(params[:client])
+      if @client.update_attributes(client_params)
         format.html { redirect_to @client, notice: 'Client was successfully updated.' }
         format.json { head :no_content }
       else
@@ -61,4 +61,10 @@ class ClientsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+
+    def client_params
+      params.require(:client).permit(:name, :description, :estimated_delivery_time, :delivery_item)
+    end
 end

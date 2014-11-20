@@ -31,6 +31,7 @@ FactoryGirl.define do
   factory :client do
     name 'Test client'
     description 'This is a test client'
+    estimated_delivery_time 42
   end
 
   factory :branch do

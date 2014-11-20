@@ -28,7 +28,7 @@ module PanelHelper
       error: 'alert-danger',
       alert: 'alert-warning',
       notice: 'alert-info'
-    }[type] || type.to_s
+    }[type] || type.to_s.html_safe
   end
 
   def errors_for(record, options = {})

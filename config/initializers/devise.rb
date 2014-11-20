@@ -4,13 +4,13 @@ Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
-  config.secret_key = 'b5cce3a66cc67b2cf3eed851c97bef1c3ea8923d15f763731d8e9b210737cc7fb8dee46a21044e5143d37678fc831a87b0638e906da5fd4f81f4af1881d8648c'
+  # config.secret_key = '5687652a6e375bed98bc73f11ba41600b77f4cc7addce1b3e7d0492c6623a28b2d3c088c4fb66ab3f6550d58424baa4a1f3b94d61278c53ed6946fc63514d012'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  #config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -97,7 +97,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
-  # config.pepper = '5de25293aa163f882b76e4b2e38583c1433832528b600ba7fe41f4e716282cb80d9ec673b74e7c0d10c237a89ca78f7c5e08bc704ddb538f3d24e7ae32493efd'
+  # config.pepper = '2e9fefe0d7a5574e029106965b7fb679c1faacee32f48e99bb3e456b87a87034b6d10001749335da88aff6e2087b23f00abafc13120d2ebd63bcc8d4bf118aa6'
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
@@ -257,13 +257,3 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 end
-
-
-# https://github.com/plataformatec/devise/wiki/How-To:-Create-custom-layouts
-#Rails.application.config.to_prepare do
-#  Devise::SessionsController.layout "devise"
-#  Devise::RegistrationsController.layout "devise"
-#  Devise::ConfirmationsController.layout "devise"
-#  Devise::UnlocksController.layout "devise"
-#  Devise::PasswordsController.layout "devise"
-#end

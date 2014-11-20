@@ -3,7 +3,7 @@ module Addressable
 
   included do
     has_one :address, as: :addressable
-    attr_accessible :address
+    #attr_accessible :address
   end
 
 end

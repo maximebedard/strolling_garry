@@ -1,10 +1,5 @@
 class Path < ActiveRecord::Base
 
-  # Attributes
-  attr_accessible :name, :mode, :date, :distance, :distance_time, :path_type, :branch_id,
-    :waypoints_attributes, :clients_attributes, :potential_clients_attributes
-
-
   # Relations
   has_many :waypoints
   has_and_belongs_to_many :clients

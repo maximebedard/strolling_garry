@@ -1,7 +1,7 @@
 class Client < ActiveRecord::Base
   include Addressable
 
-  attr_accessible :name, :description, :estimated_delivery_time, :delivery_item
+  #attr_accessible :name, :description, :estimated_delivery_time, :delivery_item
 
   validates_numericality_of :estimated_delivery_time
 

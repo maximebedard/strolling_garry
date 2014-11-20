@@ -27,7 +27,7 @@ gem 'turbolinks'
 gem 'devise'
 gem 'geocoder'
 gem 'jbuilder', '~> 2.0'
-
+gem 'tzinfo-data', platforms: [:mingw, :mswin]
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development, :test do

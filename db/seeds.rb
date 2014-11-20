@@ -11,29 +11,19 @@ admin = User.create(email:'admin@admin.com',
 
 admin.toggle!(:admin)
 
-path1 = Path.create(name: 'Route 1', mode:'car', path_type: 'delivery')
-
-
-path1.waypoints = [
-             Waypoint.create(name:'Waypoint 1', description:'',
-              address:Address.create(number:66, street: 'Racine', city: 'Pincourt', postal_code:'J7V 8E9')),
-             Waypoint.create(name:'Waypoint 2', description:'',
-              address:Address.create(number:1100, street: 'Notre-Dame Ouest', city: 'Montreal', postal_code:'H3C 1K3')),
-             Waypoint.create(name:'Waypoint 3', description:'',
-               address:Address.create(number:1909, street: 'Avenue des Canadiens-de-Montreal', city: 'Montreal', postal_code:'H4B 5G0')),
-             Waypoint.create(name:'Waypoint 4', description:'',
-               address:Address.create(number:4141, street: 'Avenue Pierre-de Coubertin', city: 'Montreal', postal_code:'H1V 3N7')),
-            ]
-
-admin.paths << path1
-
-Branch.create(name: 'Branch 1', description:'',
-  address:Address.create(number:66, street: 'Racine', city: 'Pincourt', postal_code:'J7V 8E9'))
-Branch.create(name: 'Branch 2', description:'',
+Branch.create(name: 'Ecole de technologie superieure', description:'',
   address:Address.create(number:1100, street: 'Notre-Dame Ouest', city: 'Montreal', postal_code:'H3C 1K3'))
-Branch.create(name: 'Branch 3', description:'',
+Branch.create(name: 'Centre Bell', description: '',
   address:Address.create(number:1909, street: 'Avenue des Canadiens-de-Montreal', city: 'Montreal', postal_code:'H4B 5G0'))
+Branch.create(name: 'Stade Olympique', description: '',
+  address:Address.create(number:4141, street: 'Avenue Pierre-de Coubertin', city: 'Montreal', postal_code:'H1V 3N7'))
+
 
 (1..10).each do |i|
-  Client.create(name: "Client #{i}", description: "This is a description", estimated_delivery_time: i)
+  Client.create(name: "Client #{i}", description: "This is a description", estimated_delivery_time: i,
+  address:Address.create(number:1909, street: 'Avenue des Canadiens-de-Montreal', city: 'Montreal', postal_code:'H4B 5G0'))
+end
+
+(1..10).each do |i|
+  PotentialClient.create(name: "Client #{i}", description: "This is a description")
 end

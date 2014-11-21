@@ -34,9 +34,9 @@
     <div class="col-sm-6">
       <div class="form-group">
         <div class="btn-group btn-group-justified" data-toggle="buttons">
-          <% %w(car bus bicycle male).each do |id| %>
+          <% Path::MODES.each do |mode| %>
             <%= f.label :mode, class: "btn btn-primary" do %>
-              <%= f.radio_button :mode, id %><i class="fa fa-<%= id %>"></i>
+              <%= f.radio_button :mode, mode %><%= "<i class='fa fa-#{mode}'></i>".html_safe %>
             <% end %>
           <% end %>
         </div>
@@ -51,10 +51,12 @@
     <h4>Clients to the path <small>(<%= link_to "Add client", new_client_path %>)</small></h4>
 
 
-    <div class="list-group">
-      <% Client.all.each do |client| %>
-        <%= render partial: "clients/list_item", locals: { client: client } %>
-      <% end %>
+    <div class="list-group" data-toggle="scrollable">
+      <div>
+        <% Client.all.each do |client| %>
+          <%= render partial: "clients/list_item", locals: { client: client } %>
+        <% end %>
+      </div>
     </div>
 
     </div>

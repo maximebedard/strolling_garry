@@ -1,6 +1,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap/dist/js/bootstrap
+//= require perfect-scrollbar/min/perfect-scrollbar.min
 
 $(document).ready(function(){
 
@@ -14,5 +15,11 @@ $(document).ready(function(){
       $button.removeClass("active");
     }
   });
+
+  $("[data-toggle='scrollable']").each(function(i, el){
+    $(el).perfectScrollbar();
+    $(el).addClass("scrollable");
+  });
+
 
 });

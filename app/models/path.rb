@@ -1,5 +1,8 @@
 class Path < ActiveRecord::Base
 
+  # Constants
+  MODES = %w(car bus bicycle male)
+
   # Relations
   has_many :waypoints
   has_and_belongs_to_many :clients

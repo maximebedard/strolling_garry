@@ -23,11 +23,6 @@ FactoryGirl.define do
     path_type 'delivery'
   end
 
-  factory :waypoint do
-    name 'Test waypoint'
-    description 'This is a test waypoint'
-  end
-
   factory :client do
     name 'Test client'
     description 'This is a test client'

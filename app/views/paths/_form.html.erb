@@ -50,41 +50,33 @@
   <div class="row">
 
     <div class="col-sm-offset-1 col-sm-10">
-    <h4>Clients to the path <small>(<%= link_to "Add client", new_client_path %>)</small></h4>
+      <h4>Selected clients <small>(<%= link_to "Add client", new_client_path %>)</small></h4>
 
-
-
-
-
-    <div class="list-group" data-provide="scrollable">
-
-      <%= f.collection_check_boxes :client_ids, Client.all, :id, :name do |b| %>
-
-        <a class="list-group-item" data-toggle="checkbox">
-          <span class="pull-right">
-            <%= b.check_box %>
-          </span>
-
-          <h4 class="list-group-item-heading">
-              <%= b.object.name %>
-          </h4>
-          <div class="list-group-item-text">
-            <i><%= b.object.description %></i>
-            <% if b.object.address %>
-              <%= render partial: "partials/address", locals: { address: b.object.address } %>
-            <% end %>
-          </div>
-
-        </a>
-
-      <% end %>
-
-    </div>
+      <div class="list-group" data-provide="scrollable">
+        <%= f.collection_check_boxes :client_ids, Client.all, :id, :name do |b| %>
+          <%= render partial:"clients/list_item", locals: { buidler: b } %>
+        <% end %>
+      </div>
 
     </div>
 
   </div>
 
+
+  <div class="row">
+
+    <div class="col-sm-offset-1 col-sm-10">
+      <h4>Selected potential clients <small>(<%= link_to "Add potential client", new_potential_client_path %>)</small></h4>
+
+      <div class="list-group" data-provide="scrollable">
+        <%= f.collection_check_boxes :potential_client_ids, PotentialClient.all, :id, :name do |b| %>
+          <%= render partial:"clients/list_item", locals: { buidler: b } %>
+        <% end %>
+      </div>
+
+    </div>
+
+  </div>
 
 
 

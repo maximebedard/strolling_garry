@@ -1,10 +1,17 @@
-<a class="list-group-item">
 
-  <h4 class="list-group-item-heading"><%= client.name %></h4>
-  <p class="list-group-item-text"><%= client.description %></p>
-  <% if client.address %>
-    <p class="list-group-item-text">
-      <%= render partial: "partials/address", locals: { address: client.address } %>
-    </p>
-  <% end %>  
+<a class="list-group-item" data-toggle="checkbox">
+  <span class="pull-right">
+    <%= buidler.check_box %>
+  </span>
+
+  <h4 class="list-group-item-heading">
+    <%= buidler.object.name %>
+  </h4>
+  <div class="list-group-item-text">
+    <i><%= buidler.object.description %></i>
+    <% if buidler.object.address %>
+    <%= render partial: "partials/address", locals: { address: buidler.object.address } %>
+    <% end %>
+  </div>
+
 </a>

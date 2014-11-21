@@ -2,6 +2,7 @@
 //= require jquery_ujs
 //= require bootstrap/dist/js/bootstrap
 //= require perfect-scrollbar/min/perfect-scrollbar.min
+//= require bootstrap-datepicker/js/bootstrap-datepicker
 
 $(document).ready(function(){
 
@@ -16,9 +17,21 @@ $(document).ready(function(){
     }
   });
 
-  $("[data-toggle='scrollable']").each(function(i, el){
+  $("[data-provide='scrollable']").each(function(i, el){
     $(el).perfectScrollbar();
     $(el).addClass("scrollable");
+  });
+
+  $("[data-toggle='checkbox']").each(function(i, el){
+    var $checkbox = $(el).find("input[type='checkbox']")
+
+    $(el).click(function(){
+      $checkbox.prop("checked", !$checkbox.prop("checked"))
+    });
+
+    $($checkbox).click(function(e){
+      e.stopImmediatePropagation();
+    });
   });
 
 

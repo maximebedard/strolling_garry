@@ -88,7 +88,7 @@ class PathsController < ApplicationController
   private
 
   def path_params
-    params.require(:path).permit(:name, :mode, :date, :distance, :distance_time, :path_type, :branch_id)
+    params.require(:path).permit(:name, :mode, :date, :distance, :distance_time, :path_type, :branch_id, client_ids:[], potential_client_ids:[])
   end
 
 

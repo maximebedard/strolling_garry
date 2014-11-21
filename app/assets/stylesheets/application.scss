@@ -12,6 +12,7 @@
  *= require font-awesome/css/font-awesome
  *= require angular-ui-select/dist/select
  *= require perfect-scrollbar/min/perfect-scrollbar.min
+ *= require bootstrap-datepicker/css/datepicker3.css
  *= require_self
  */
 
@@ -43,5 +44,15 @@ body{
 }
 
 .scrollable {
-  height:300px; position: relative; overflow: hidden;
+  height:300px;
+  position: relative;
+  overflow: hidden;
+  padding-bottom:10px;
+}
+
+.list-group-item-text {
+  address {
+    font-size:8px;
+    margin-bottom:0;  
+  }
 }

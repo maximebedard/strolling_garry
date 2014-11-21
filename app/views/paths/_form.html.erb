@@ -28,11 +28,13 @@
   <div class="row">
     <div class="col-sm-6">
       <div class="form-group">
-        <%= f.text_field :date, class: 'form-control' %>
+        <%= f.label :date %>
+        <%= f.text_field :date, class: 'form-control', data:{ provide: 'datepicker' } %>
       </div>
     </div>
     <div class="col-sm-6">
       <div class="form-group">
+        <%= f.label :mode %>
         <div class="btn-group btn-group-justified" data-toggle="buttons">
           <% Path::MODES.each do |mode| %>
             <%= f.label :mode, class: "btn btn-primary" do %>
@@ -51,12 +53,32 @@
     <h4>Clients to the path <small>(<%= link_to "Add client", new_client_path %>)</small></h4>
 
 
-    <div class="list-group" data-toggle="scrollable">
-      <div>
-        <% Client.all.each do |client| %>
-          <%= render partial: "clients/list_item", locals: { client: client } %>
-        <% end %>
-      </div>
+
+
+
+    <div class="list-group" data-provide="scrollable">
+
+      <%= f.collection_check_boxes :client_ids, Client.all, :id, :name do |b| %>
+
+        <a class="list-group-item" data-toggle="checkbox">
+          <span class="pull-right">
+            <%= b.check_box %>
+          </span>
+
+          <h4 class="list-group-item-heading">
+              <%= b.object.name %>
+          </h4>
+          <div class="list-group-item-text">
+            <i><%= b.object.description %></i>
+            <% if b.object.address %>
+              <%= render partial: "partials/address", locals: { address: b.object.address } %>
+            <% end %>
+          </div>
+
+        </a>
+
+      <% end %>
+
     </div>
 
     </div>

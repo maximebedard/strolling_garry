@@ -24,6 +24,7 @@ end
 gem 'jquery-rails'
 gem 'turbolinks'
 
+gem 'high_voltage', '~> 2.2.1'
 gem 'devise'
 gem 'kaminari'
 gem 'geocoder'

@@ -25,7 +25,7 @@ class PotentialClientsController < ApplicationController
   end
 
   def create
-    @potential_client = PotentialClient.new(params[:potential_client])
+    @potential_client = PotentialClient.new(potential_client_params)
 
     respond_to do |format|
       if @potential_client.save
@@ -42,7 +42,7 @@ class PotentialClientsController < ApplicationController
     @potential_client = PotentialClient.find(params[:id])
 
     respond_to do |format|
-      if @potential_client.update_attributes(params[:potential_client])
+      if @potential_client.update_attributes(potential_client_params)
         format.html { redirect_to @potential_client, notice: 'Potential client was successfully updated.' }
         format.json { head :no_content }
       else

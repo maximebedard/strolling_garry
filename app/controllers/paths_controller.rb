@@ -6,7 +6,7 @@ class PathsController < ApplicationController
   # GET /paths
   # GET /paths.json
   def index
-    @paths = Path.all
+    @paths = Path.all.page(params[:page]).per(15)
 
     respond_to do |format|
       format.html # index.html.erb

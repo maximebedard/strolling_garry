@@ -1,6 +1,6 @@
 class ClientsController < ApplicationController
   def index
-    @clients = Client.all
+    @clients = Client.all.page(params[:page]).per(15)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @clients }
@@ -17,6 +17,7 @@ class ClientsController < ApplicationController
 
   def new
     @client = Client.new
+    @client.build_address
 
     respond_to do |format|
       format.html # new.html.erb
@@ -65,6 +66,8 @@ class ClientsController < ApplicationController
   private
 
     def client_params
-      params.require(:client).permit(:name, :description, :estimated_delivery_time, :delivery_item)
+      params.require(:client).permit(:name, :description, :estimated_delivery_time,
+        :delivery_item, address_attributes: [
+          :number, :street, :city, :province, :country, :postal_code])
     end
 end

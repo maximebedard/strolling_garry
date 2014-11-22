@@ -25,6 +25,11 @@
         </tr>
         <% end %>
       </table>
+
+      <div class="text-center">
+        <%= paginate @paths %>
+      </div>
+
     <% end %>
 
     <% if @paths.length == 0 %>

@@ -16,7 +16,7 @@
         <tr>
           <td><%= client.name %></td>
           <td><%= client.description %></td>
-          <td><%#= render partial: "address", locals: { adresse: client.address} %></td>
+          <td><%= render partial: "partials/address", locals: { address: client.address} %></td>
           <td><%= client.estimated_delivery_time %></td>
           <td><%= client.delivery_item %></td>
           <td>
@@ -27,6 +27,10 @@
         </tr>
         <% end %>
       </table>
+      <div class="text-center">
+        <%= paginate @clients %>
+      </div>
+
     <% end %>
 
     <% if @clients.length == 0 %>

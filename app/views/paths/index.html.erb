@@ -12,7 +12,7 @@
           <th>Actions</th>
         </tr>
         <% @paths.each do |path| %>
-        <tr>
+        <tr class="<%= "active" if flash[:selected] == path.id %>">
           <td><%= path.name %></td>
           <td><%= path.path_type %></td>
           <td><%= path.clients.length %></td>

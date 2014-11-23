@@ -29,7 +29,7 @@ class PotentialClientsController < ApplicationController
 
     respond_to do |format|
       if @potential_client.save
-        format.html { redirect_to @potential_client, notice: 'Potential client was successfully created.' }
+        format.html { redirect_to @potential_client, info: 'Potential client was successfully created.' }
         format.json { render json: @potential_client, status: :created, location: @potential_client }
       else
         format.html { render action: "new" }
@@ -43,7 +43,7 @@ class PotentialClientsController < ApplicationController
 
     respond_to do |format|
       if @potential_client.update_attributes(potential_client_params)
-        format.html { redirect_to @potential_client, notice: 'Potential client was successfully updated.' }
+        format.html { redirect_to @potential_client, info: 'Potential client was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

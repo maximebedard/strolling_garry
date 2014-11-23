@@ -37,6 +37,11 @@
     <div class="row">
       <%= yield %>
     </div>
+
+    <div class="row">
+      <%= debug(params) %>
+      <%= debug(flash) %>
+    </div>
   </div>
   <%= javascript_include_tag "application" %>
   <%= yield :scripts %>

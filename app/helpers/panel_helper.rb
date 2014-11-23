@@ -22,15 +22,6 @@ module PanelHelper
     ".html_safe
   end
 
-  def bootstrap_class_for(type)
-    {
-      success: 'alert-success',
-      error: 'alert-danger',
-      alert: 'alert-warning',
-      notice: 'alert-info'
-    }[type] || type.to_s.html_safe
-  end
-
   def errors_for(record, options = {})
 
     return if record.errors.empty?

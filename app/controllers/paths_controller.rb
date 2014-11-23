@@ -48,7 +48,7 @@ class PathsController < ApplicationController
 
     respond_to do |format|
       if @path.save
-        format.html { redirect_to @path, notice: 'Path was successfully created.' }
+        format.html { redirect_to paths_path, flash: {info: 'Path was successfully created.', selected: @path.id} }
         format.json { render json: @path, status: :created, location: @path }
       else
         format.html { render action: "new" }
@@ -64,7 +64,7 @@ class PathsController < ApplicationController
 
     respond_to do |format|
       if @path.update_attributes(path_params)
-        format.html { redirect_to @path, notice: 'Path was successfully updated.' }
+        format.html { redirect_to @path, info: 'Path was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

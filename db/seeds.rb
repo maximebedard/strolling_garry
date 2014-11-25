@@ -19,11 +19,11 @@ Branch.create(name: 'Stade Olympique', description: '',
   address:Address.create(number:4141, street: 'Avenue Pierre-de Coubertin', city: 'Montreal', postal_code:'H1V 3N7'))
 
 
-(1..100).each do |i|
+(1..5).each do |i|
   Client.create(name: "Client #{i}", description: "This is a description", estimated_delivery_time: i,
     address:Address.create(number:1909, street: 'Avenue des Canadiens-de-Montreal', city: 'Montreal', postal_code:'H4B 5G0'))
 end
 
-(1..100).each do |i|
+(1..5).each do |i|
   PotentialClient.create(name: "Client #{i}", description: "This is a description")
 end

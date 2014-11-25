@@ -1,7 +1,8 @@
 <%= errors_for @path %>
 
+<% remote ||= false %>
 
-<%= form_for @path do |f| %>
+<%= form_for @path, remote: remote  do |f| %>
 
   <div class="form-group">
     <%= f.label :name %>

@@ -16,35 +16,79 @@
  *= require_self
  */
 
-
-
-body{
+.cover-img {
   background: image-url('bg.png') no-repeat center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+
 }
-
-
 .logo {
-  padding: 70px 25px 70px 25px;
+  padding: 70px 25px;
   display: inline-block;
-  background-color: #FFF;
+  background-color: #fff;
   border-radius: 115px;
-  border: #E7E7E7;
-}
+  border: #e7e7e7;
 
+}
 .scrollable {
-  height:300px;
+  height: 300px;
   position: relative;
   overflow: hidden;
-  padding-bottom:10px;
-}
+  padding-bottom: 10px;
 
+}
 .list-group-item-text {
   address {
-    font-size:8px;
-    margin-bottom:0;
+    font-size: 8px;
+    margin-bottom: 0;
   }
+
+}
+.abs-flashes {
+  position: absolute;
+  width: 500px;
+  top: 75px;
+  left: 50%;
+  margin-left: -250px;
+
+}
+html,
+body {
+  height: 100%;
+
+}
+#map {
+  margin-top: 50px;
+  height: 100%;
+  width: 100%;
+  overflow: none;
+
+}
+#path {
+  z-index:1030;
+  position:fixed;
+  height:51px;
+  top:0px;
+  left:90px;
+  width:503px;
+
+  padding:8px 20px 8px 20px;
+  background-color:#f8f8f8;
+  border:1px solid #e7e7e7;
+  border-top:none;
+
+}
+#path-details {
+  z-index:1030;
+  position: fixed;
+  top:51px;
+  left:90px;
+  width:503px;
+  //padding:5px;
+
+  background-color:rgba(248, 248, 248, 0.8);
+  border:1px solid #e7e7e7;
+  border-top:none;
 }

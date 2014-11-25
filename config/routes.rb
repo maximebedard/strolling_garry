@@ -2,12 +2,18 @@ Rails.application.routes.draw do
 
   root :to => 'paths#index'
 
-  resources :paths
+  resources :paths do
+    member do
+      get 'clients'
+      get 'potential_clients'
+
+    end
+  end
   resources :clients
   resources :potential_clients
 
   devise_for :users
-  
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

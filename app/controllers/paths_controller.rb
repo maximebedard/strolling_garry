@@ -1,12 +1,16 @@
 class PathsController < ApplicationController
 
+  layout 'map', only: [:show]
+
   # This is Devise's authentication
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
+
+  before_action :set_path, except: [:index, :create, :new]
 
   # GET /paths
   # GET /paths.json
   def index
-    @paths = Path.all.page(params[:page]).per(15)
+    @paths = current_user.paths.all.page(params[:page]).per(15)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,19 +21,30 @@ class PathsController < ApplicationController
   # GET /paths/1
   # GET /paths/1.json
   def show
-    @path = Path.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
+      format.js # show.js.erb
       format.json { render json: @path }
     end
   end
 
+  def clients
+    respond_to do |format|
+      format.json { render json: @path.clients }
+    end
+  end
+
+  def potential_clients
+    respond_to do |format|
+      format.json { render json: @path.potential_clients }
+    end
+  end
+
+
   # GET /paths/new
   # GET /paths/new.json
   def new
-    @path = Path.new
-
+    @path = current_user.paths.build
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @path }
@@ -38,13 +53,12 @@ class PathsController < ApplicationController
 
   # GET /paths/1/edit
   def edit
-    @path = Path.find(params[:id])
   end
 
   # POST /paths
   # POST /paths.json
   def create
-    @path = Path.new(path_params)
+    @path = current_user.paths.build(path_params)
 
     respond_to do |format|
       if @path.save
@@ -60,8 +74,6 @@ class PathsController < ApplicationController
   # PUT /paths/1
   # PUT /paths/1.json
   def update
-    @path = Path.find(params[:id])
-
     respond_to do |format|
       if @path.update_attributes(path_params)
         format.html { redirect_to @path, info: 'Path was successfully updated.' }
@@ -76,7 +88,6 @@ class PathsController < ApplicationController
   # DELETE /paths/1
   # DELETE /paths/1.json
   def destroy
-    @path = Path.find(params[:id])
     @path.destroy
 
     respond_to do |format|
@@ -87,9 +98,15 @@ class PathsController < ApplicationController
 
   private
 
-  def path_params
-    params.require(:path).permit(:name, :mode, :date, :distance, :distance_time, :path_type, :branch_id, client_ids:[], potential_client_ids:[])
-  end
+    def set_path
+      @path = current_user.paths.find(params[:id])
+    end
+
+    def path_params
+      params.require(:path).permit(:name, :mode, :date, :distance,
+        :distance_time, :path_type, :branch_id,
+        client_ids:[], potential_client_ids:[])
+    end
 
 
 end

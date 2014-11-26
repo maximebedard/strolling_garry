@@ -1,0 +1,47 @@
+
+<%= panel_for title: 'My potential clients', size: 12 do %>
+  <div class="panel-body">
+
+    <% if @potential_clients.length > 0 %>
+      <table class="table table-bordered">
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Address</th>
+          <th>Estimated Time Spent</th>
+          <th>Marketing Agent Name</th>
+          <th>Decision</th>
+          <th>Action</th>
+        </tr>
+        <% @potential_clients.each do |potential_client| %>
+        <tr>
+          <td><%= potential_client.name %></td>
+          <td><%= potential_client.description %></td>
+          <td><%= render partial: "partials/address", locals: { address: potential_client.address} %></td>
+          <td><%= potential_client.time_spent %></td>
+          <td><%= potential_client.marketing_agent_name %></td>
+          <td><%= potential_client.decision %></td>
+          <td>
+            <%= icon_to 'glyphicon glyphicon-check', potential_client %>
+            <%= icon_to 'glyphicon glyphicon-edit', edit_potential_client_path(potential_client) %>
+            <%= icon_to 'glyphicon glyphicon-remove-circle', potential_client, '', method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        </tr>
+        <% end %>
+      </table>
+      <div class="text-center">
+        <%= paginate @potential_clients %>
+      </div>
+
+    <% end %>
+
+    <% if @potential_clients.length == 0 %>
+      <p>No potential clients... please click on the button below to create a new potential client.</p>
+    <% end %>
+
+  </div>
+
+  <div class="panel-footer text-right">
+    <%= link_to 'Add new', new_potential_client_path, class: 'btn btn-primary' %>
+  </div>
+<% end %>

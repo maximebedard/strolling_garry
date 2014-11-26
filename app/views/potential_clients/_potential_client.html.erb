@@ -1,0 +1,7 @@
+
+<strong><%= @potential_client.name %></strong><br>
+
+<i><%= @potential_client.description || "N/A" %></i></br>
+
+<%= render @potential_client.address %>
+<%= icon_to "glyphicon glyphicon-edit", edit_potential_client_path(@potential_client), "Modifier", class: 'pull-right' %>

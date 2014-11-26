@@ -1,6 +1,6 @@
 class PotentialClientsController < ApplicationController
   def index
-    @potential_clients = PotentialClient.all
+    @potential_clients = PotentialClient.all.page(params[:page]).per(15)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @potential_clients }
@@ -17,6 +17,8 @@ class PotentialClientsController < ApplicationController
 
   def new
     @potential_client = PotentialClient.new
+
+    @potential_client.build_address
 
     respond_to do |format|
       format.html # new.html.erb
@@ -57,14 +59,24 @@ class PotentialClientsController < ApplicationController
     @potential_client.destroy
 
     respond_to do |format|
-      format.html { redirect_to clients_url }
+      format.html { redirect_to potential_clients_url }
       format.json { head :no_content }
     end
   end
 
+  def show
+    @potential_client = PotentialClient.find(params[:id])
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @potential_client }
+    end
+  end
+
+
   private
 
     def potential_client_params
-      params.require(:potential_client).permit(:name, :description)
+      params.require(:potential_client).permit(:name, :description, :time_spent, :decision,
+      :marketing_agent_name, address_attributes: [:number, :street, :city, :province, :country, :postal_code])
     end
 end

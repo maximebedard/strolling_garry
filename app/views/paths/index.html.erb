@@ -20,7 +20,7 @@
           <td class="text-center">
             <div class="btn-group">
               <%= icon_to 'glyphicon glyphicon-map-marker', map_path_path(path), '', class: "btn btn-primary" %>
-              <%= icon_to 'glyphicon glyphicon-stats', map_path_path(path), '', class: "btn btn-success" %>
+              <%= icon_to 'glyphicon glyphicon-stats', reports_path_path(path), '', class: "btn btn-success" %>
               <%= icon_to 'glyphicon glyphicon-edit', edit_path_path(path), '', class: "btn btn-warning" %>
               <%= icon_to 'glyphicon glyphicon-remove-circle', path, '', method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
             </div>

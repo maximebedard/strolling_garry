@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get 'clients'
       get 'potential_clients'
       get 'map'
+      get 'reports'
     end
   end
   resources :clients

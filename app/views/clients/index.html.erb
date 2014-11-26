@@ -16,7 +16,7 @@
         <tr>
           <td><%= client.name %></td>
           <td><%= client.description %></td>
-          <td><%= render partial: "partials/address", locals: { address: client.address} %></td>
+          <td><%= render client.address %></td>
           <td><%= client.estimated_delivery_time %></td>
           <td><%= client.delivery_item %></td>
           <td>

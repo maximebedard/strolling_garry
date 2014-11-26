@@ -10,7 +10,7 @@
   <div class="list-group-item-text">
     <i><%= buidler.object.description %></i>
     <% if buidler.object.address %>
-    <%= render partial: "partials/address", locals: { address: buidler.object.address } %>
+    <%= render buidler.object.address %>
     <% end %>
   </div>
 

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     member do
       get 'clients'
       get 'potential_clients'
-
+      get 'map'
     end
   end
   resources :clients

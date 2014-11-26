@@ -1,6 +1,6 @@
 class PathsController < ApplicationController
 
-  layout 'map', only: [:show]
+  layout 'map', only: [:map]
 
   # This is Devise's authentication
   before_action :authenticate_user!
@@ -40,6 +40,9 @@ class PathsController < ApplicationController
     end
   end
 
+  def map
+
+  end
 
   # GET /paths/new
   # GET /paths/new.json

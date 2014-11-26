@@ -18,7 +18,7 @@
           <td><%= path.clients.length %></td>
           <td><%= path.potential_clients.length %></td>
           <td>
-            <%= icon_to 'glyphicon glyphicon-check', path %>
+            <%= icon_to 'glyphicon glyphicon-check', map_path_path(path) %>
             <%= icon_to 'glyphicon glyphicon-edit', edit_path_path(path) %>
             <%= icon_to 'glyphicon glyphicon-remove-circle', path, '', method: :delete, data: { confirm: 'Are you sure?' } %>
           </td>

@@ -7,6 +7,15 @@ class ClientsController < ApplicationController
     end
   end
 
+  def show
+    @client = Client.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.js
+      format.json { render json: @client }
+    end
+  end
+
   def edit
     @client = Client.find(params[:id])
     respond_to do |format|

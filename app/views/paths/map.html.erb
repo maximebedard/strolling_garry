@@ -1,0 +1,75 @@
+
+<% content_for :navbar_left do %>
+  <li><a data-toggle="collapse" data-target="#path-details"><i class="fa fa-map-marker"></i> <%= @path.name %></a></li>
+<% end %>
+
+<div id="path-details" class="collapse">
+  <div data-provide="scrollable" style="padding:5px;">
+    <%= render 'form' %>
+  </div>
+</div>
+
+<div id="map"></div>
+
+<%= content_for :scripts do %>
+<script type="text/javascript">
+
+  var map, mapOption, infoWindow;
+
+  function initialize() {
+
+    // Initialize the default map options hash
+    mapOptions = {
+      center: new google.maps.LatLng(45.536482, -73.592702),
+      zoom: 8
+    };
+
+    // Create the map
+    map = new google.maps.Map($("#map")[0], mapOptions);
+
+    // Create a single instance of the info window
+    infoWindow = new google.maps.InfoWindow({
+    });
+
+    // Load data
+    loadMarkers();
+  }
+
+  function loadMarkers(){
+    $.getJSON("clients.json", function(data){
+      addMarkers(data);
+    });
+
+    $.getJSON("potential_clients.json", function(data){
+      addMarkers(data);
+    });
+  }
+
+  function addMarkers(addressables) {
+    $.each(addressables, function(index, el){
+      var marker = addMarker(new google.maps.LatLng(el.address.latitude, el.address.longitude));
+
+      google.maps.event.addListener(marker, 'click', function() {
+        infoWindow.open(map,marker);
+        $.ajax({
+          type: 'GET',
+          url: '/clients/' + el.id,
+          dataType : 'script'
+        });
+      });
+    });
+  }
+
+  function addMarker(position){
+    return new google.maps.Marker({
+      map: map,
+      animation: google.maps.Animation.DROP,
+      position: position
+    });
+  }
+
+  google.maps.event.addDomListener(window, 'load', initialize);
+
+
+</script>
+<% end %>

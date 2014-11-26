@@ -13,8 +13,11 @@
       </div>
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
+        <ul class="nav navbar-nav navbar-left">
+          <%= yield :navbar_left %>
+        </ul>
         <ul class="nav navbar-nav navbar-right">
+          <%= yield :navbar_right %>
           <li><%= icon_to 'fa fa-map-marker', paths_path, 'My paths' %></li>
           <li><%= icon_to 'fa fa-users', potential_clients_path, 'Potential clients' %></li>
           <li><%= icon_to 'fa fa-user', clients_path, 'Clients' %></li>

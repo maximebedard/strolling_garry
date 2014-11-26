@@ -24,7 +24,7 @@ class Path < ActiveRecord::Base
   accepts_nested_attributes_for :clients, :potential_clients
 
   def as_json(options = {})
-    super({ include: [:waypoints, :clients, :branch] }.merge(options))
+    super({ include: [:clients, :branch] }.merge(options))
   end
 
 

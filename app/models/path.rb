@@ -14,11 +14,32 @@ class Path < ActiveRecord::Base
   validates :mode, presence:true
   validates :path_type, inclusion: { in: %w(delivery marketing) }
 
+
+  validate :max_clients
+  validate :max_potential_clients
+
+
+
   # Nested attributes
   accepts_nested_attributes_for :clients, :potential_clients
 
   def as_json(options = {})
     super({ include: [:waypoints, :clients, :branch] }.merge(options))
   end
+
+
+  private
+
+    MAX_WAYPOINT = 8
+    # Limit the number of waypoint set by googole API
+    def max_clients
+      errors.add(:clients, "has more than #{MAX_WAYPOINT} clients.") if clients.size > MAX_WAYPOINT
+    end
+
+    def max_potential_clients
+      errors.add(:potential_clients, "has more than #{MAX_WAYPOINT} clients.") if potential_clients.size > MAX_WAYPOINT
+    end
+
+
 
 end

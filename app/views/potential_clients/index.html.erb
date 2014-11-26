@@ -21,10 +21,11 @@
           <td><%= potential_client.time_spent %></td>
           <td><%= potential_client.marketing_agent_name %></td>
           <td><%= potential_client.decision %></td>
-          <td>
-            <%= icon_to 'glyphicon glyphicon-check', potential_client %>
-            <%= icon_to 'glyphicon glyphicon-edit', edit_potential_client_path(potential_client) %>
-            <%= icon_to 'glyphicon glyphicon-remove-circle', potential_client, '', method: :delete, data: { confirm: 'Are you sure?' } %>
+          <td class="text-center">
+            <div class="btn btn-group">
+              <%= icon_to 'glyphicon glyphicon-edit', edit_potential_client_path(potential_client), '', class: 'btn btn-warning' %>
+              <%= icon_to 'glyphicon glyphicon-remove-circle', potential_client, '', method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+            </div>
           </td>
         </tr>
         <% end %>

@@ -19,10 +19,11 @@
           <td><%= render client.address %></td>
           <td><%= client.estimated_delivery_time %></td>
           <td><%= client.delivery_item %></td>
-          <td>
-            <%= icon_to 'glyphicon glyphicon-check', client %>
-            <%= icon_to 'glyphicon glyphicon-edit', edit_client_path(client) %>
-            <%= icon_to 'glyphicon glyphicon-remove-circle', client, '', method: :delete, data: { confirm: 'Are you sure?' } %>
+          <td class="text-center">
+            <div class="btn-group">
+              <%= icon_to 'glyphicon glyphicon-edit', edit_client_path(client), '', class: 'btn btn-warning' %>
+              <%= icon_to 'glyphicon glyphicon-remove-circle', client, '', method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+            </div>
           </td>
         </tr>
         <% end %>

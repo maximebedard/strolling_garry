@@ -17,10 +17,12 @@
           <td><%= path.path_type %></td>
           <td><%= path.clients.length %></td>
           <td><%= path.potential_clients.length %></td>
-          <td>
-            <%= icon_to 'glyphicon glyphicon-check', map_path_path(path) %>
-            <%= icon_to 'glyphicon glyphicon-edit', edit_path_path(path) %>
-            <%= icon_to 'glyphicon glyphicon-remove-circle', path, '', method: :delete, data: { confirm: 'Are you sure?' } %>
+          <td class="text-center">
+            <div class="btn-group">
+              <%= icon_to 'glyphicon glyphicon-map-marker', map_path_path(path), '', class: "btn btn-primary" %>
+              <%= icon_to 'glyphicon glyphicon-edit', edit_path_path(path), '', class: "btn btn-warning" %>
+              <%= icon_to 'glyphicon glyphicon-remove-circle', path, '', method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+            </div>
           </td>
         </tr>
         <% end %>

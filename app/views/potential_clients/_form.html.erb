@@ -20,7 +20,7 @@
 
   <div class="form-group">
     <%= f.label :decision %>
-    <%= f.text_field :decision, class: "form-control" %>
+    <%= f.select :decision, ['Acceptation', 'En attente', 'Refus'], {}, { class: 'form-control' } %>
   </div>
 
   <div class="form-group">

@@ -90,7 +90,10 @@
         });
       })
     ).done(function(){
-      calcRoute(clients);
+      if(path_type === "delivery")
+        calcRoute(clients);
+      else if(path_type === "marketing")
+        calcRoute(potential_clients);
     });
   }
 

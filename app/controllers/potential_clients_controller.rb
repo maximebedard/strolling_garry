@@ -68,6 +68,7 @@ class PotentialClientsController < ApplicationController
     @potential_client = PotentialClient.find(params[:id])
     respond_to do |format|
       format.html # index.html.erb
+      format.js
       format.json { render json: @potential_client }
     end
   end

@@ -20,7 +20,7 @@
     <div class="col-sm-6">
       <div class="form-group">
         <%= f.label :path_type %>
-        <%= f.select :path_type, ['delivery', 'marketing'], {}, { class: 'form-control' } %>
+        <%= f.select :path_type, Path::PATH_TYPES, {}, { class: 'form-control' } %>
       </div>
     </div>
   </div>
@@ -39,7 +39,7 @@
         <div class="btn-group btn-group-justified" data-toggle="buttons">
           <% Path::MODES.each do |mode| %>
             <%= f.label :mode, class: "btn btn-primary" do %>
-              <%= f.radio_button :mode, mode %><%= "<i class='fa fa-#{mode}'></i>".html_safe %>
+              <%= f.radio_button :mode, mode %><%= "<i class='fa fa-#{mode.downcase}'></i>".html_safe %>
             <% end %>
           <% end %>
         </div>

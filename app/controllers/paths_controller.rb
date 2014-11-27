@@ -79,7 +79,7 @@ class PathsController < ApplicationController
   def update
     respond_to do |format|
       if @path.update_attributes(path_params)
-        format.html { redirect_to @path, info: 'Path was successfully updated.' }
+        format.html { redirect_to map_path_path @path, info: 'Path was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

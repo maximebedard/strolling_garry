@@ -1,7 +1,8 @@
 class Path < ActiveRecord::Base
 
   # Constants
-  MODES = %w(car bus bicycle male)
+  MODES = %w(DRIVING BICYCLING TRANSIT WALKING)
+  PATH_TYPES = %w(delivery marketing)
 
   # Relations
   has_and_belongs_to_many :clients
@@ -11,8 +12,8 @@ class Path < ActiveRecord::Base
 
   # Validations
   validates :name, presence:true
-  validates :mode, presence:true
-  validates :path_type, inclusion: { in: %w(delivery marketing) }
+  validates :mode, presence:true, inclusion: { in: MODES }
+  validates :path_type, presence:true, inclusion: { in: PATH_TYPES }
 
 
   validate :max_clients

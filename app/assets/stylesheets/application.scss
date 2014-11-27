@@ -52,7 +52,7 @@
   top: 75px;
   left: 50%;
   margin-left: -250px;
-
+  z-index: 1030;
 }
 html,
 body {
@@ -91,4 +91,17 @@ body {
   background-color:rgba(248, 248, 248, 0.8);
   border:1px solid #e7e7e7;
   border-top:none;
+}
+
+.fa-driving:before {
+  content: "\f1b9";
+}
+.fa-bicycling:before {
+  content:"\f206";
+}
+.fa-transit:before {
+  content: "\f207";
+}
+.fa-walking:before {
+  content: "\f183";
 }

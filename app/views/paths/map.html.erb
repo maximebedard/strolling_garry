@@ -1,8 +1,12 @@
 
 <% content_for :navbar_left do %>
   <li><a data-toggle="collapse" data-target="#path-details"><i class="fa fa-map-marker"></i> <%= @path.name %></a></li>
-  <li><button class="btn btn-default navbar-btn" id="bob"><i class="glyphicon glyphicon-road"></i></button></li>
-  <li><button class="btn btn-default navbar-btn" data-toggle="modal" data-target="#directionsModal"><i class="glyphicon glyphicon-list-alt"></i></button></li>
+  <li>
+    <div class="btn-group">
+      <%= icon_to 'glyphicon glyphicon-stats', reports_path_path(@path), '', class: "btn btn-default navbar-btn" %>
+      <button class="btn btn-default navbar-btn" data-toggle="modal" data-target="#directionsModal"><i class="glyphicon glyphicon-list-alt"></i></button>
+    </div>
+  </li>
 <% end %>
 
 <div id="path-details" class="collapse">
@@ -17,8 +21,26 @@
 <script type="text/javascript">
 
   var map, mapOption, infoWindow, directionsService, directionsDisplay;
-  var clients = [],
-      potential_clients = [];
+
+  var start_id = <%= @path.branch.id %>;
+  var start = new google.maps.LatLng(<%= @path.branch.address.latitude %>, <%= @path.branch.address.longitude %>);
+
+  var mode = "<%= @path.mode %>";
+  var path_type = "<%= @path.path_type %>";
+
+  var RED_MARKER = {
+    url: "<%= asset_path('spotlight_red.png') %>",
+    scaledSize: new google.maps.Size(18, 32)
+  },
+  BLUE_MARKER = {
+    url: "<%= asset_path('spotlight_blue.png') %>",
+    scaledSize: new google.maps.Size(18, 32)
+  },
+  GREEN_MARKER = {
+    url: "<%= asset_path('spotlight_green.png') %>",
+    scaledSize: new google.maps.Size(18, 32)
+  };
+
 
   function initialize() {
 
@@ -37,6 +59,7 @@
 
     // Configure direction panel
     directionsDisplay.setMap(map);
+    directionsDisplay.setOptions({ suppressMarkers: true });
     directionsDisplay.setPanel($("#directionsPanel")[0]);
 
     // Load data
@@ -44,49 +67,73 @@
   }
 
   function loadMarkers(){
-    $.getJSON("clients.json", function(data){
-      addMarkers(data);
+    var clients = [];
+    var potential_clients = [];
+
+    addMarker(start_id, start, {
+      markerImage: GREEN_MARKER,
+      url: function(id) { return '/branches/' + id; }
     });
 
-    $.getJSON("potential_clients.json", function(data){
-      addMarkers(data);
-    });
-  }
-
-  function addMarkers(addressables) {
-    $.each(addressables, function(index, el){
-      clientLatLng = new google.maps.LatLng(el.address.latitude, el.address.longitude)
-      clients.push(clientLatLng);
-
-      var marker = addMarker(clientLatLng);
-
-      google.maps.event.addListener(marker, 'click', function() {
-        infoWindow.open(map,marker);
-        $.ajax({
-          type: 'GET',
-          url: '/clients/' + el.id,
-          dataType : 'script'
+    $.when(
+      $.getJSON("clients.json", function(data){
+        addMarkers(clients, data, {
+          markerImage: RED_MARKER,
+          url: function(id) { return '/clients/' + id; }
         });
-      });
+      }),
+
+      $.getJSON("potential_clients.json", function(data){
+        addMarkers(potential_clients, data, {
+          markerImage: BLUE_MARKER,
+          url: function(id) { return '/potential_clients/' + id; }
+        });
+      })
+    ).done(function(){
+      calcRoute(clients);
     });
   }
 
-  function addMarker(position){
-    return new google.maps.Marker({
+  function addMarkers(container, addressables, options) {
+    $.each(addressables, function(index, el){
+      var position = new google.maps.LatLng(el.address.latitude, el.address.longitude);
+
+      container.push(position);
+
+      addMarker(el.id, position, options);
+    });
+  }
+
+  function addMarker(id, position, options){
+    options = $.extend({
+      markerImage : RED_MARKER,
+      url: function(id){
+        return '/clients/' + id
+      }
+    }, options ||  {});
+
+    var marker = new google.maps.Marker({
       map: map,
       animation: google.maps.Animation.DROP,
-      position: position
+      position: position,
+      icon: options.markerImage
     });
+
+    google.maps.event.addListener(marker, 'click', function() {
+      infoWindow.open(map,marker);
+      $.ajax({
+        type: 'GET',
+        url: options.url(id),
+        dataType : 'script'
+      });
+    });
+    return marker;
   }
 
-  google.maps.event.addDomListener(window, 'load', initialize);
-
-  $("#bob").click(function(){
-    var start = new google.maps.LatLng(<%= @path.branch.address.latitude %>, <%= @path.branch.address.longitude %>)
-    var end = new google.maps.LatLng(<%= @path.branch.address.latitude %>, <%= @path.branch.address.longitude %>)
+  function calcRoute(points){
 
     var waypoints = []
-    $.each(clients, function(i, el){
+    $.each(points, function(i, el){
       waypoints.push({
         location: el.toString(),
         stopover:true
@@ -94,8 +141,8 @@
     });
     var request = {
       origin: start,
-      destination: end,
-      travelMode: google.maps.TravelMode.DRIVING,
+      destination: start,
+      travelMode: google.maps.TravelMode[mode],
       waypoints: waypoints,
       optimizeWaypoints: true
     };
@@ -104,7 +151,10 @@
         directionsDisplay.setDirections(response);
       }
     });
-  })
+  }
+
+
+  google.maps.event.addDomListener(window, 'load', initialize);
 
 </script>
 <% end %>

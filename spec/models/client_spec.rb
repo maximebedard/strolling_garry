@@ -2,14 +2,14 @@ require 'rails_helper'
 
 RSpec.describe Client, :type => :model do
 
-  it "creates a client with an address" do
+  it "created with an address" do
     client = create :client
     address = create :address
     client.address = address
     expect(client.address).to eq(address)
   end
 
-  it "creates a client with no address" do
+  it "created with no address" do
     client = create :client
     expect(client.address).to eq(nil)
   end

@@ -17,7 +17,6 @@ RSpec.describe Path, :type => :model do
   it "has on starting branch" do
     path = create :path
     path.branch = create(:branch)
-
   end
 
 end

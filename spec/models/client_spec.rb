@@ -14,6 +14,6 @@ RSpec.describe Client, :type => :model do
     expect(client.address).to eq(nil)
   end
 
-  pending "creates a client with no name and no address"
+  pending "creates with no name and no address"
 
 end

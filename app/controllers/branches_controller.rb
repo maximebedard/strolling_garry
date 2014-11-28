@@ -1,6 +1,6 @@
 class BranchesController < ApplicationController
 
-  before_action :must_be_admin!
+  before_action :must_be_admin!, except:[:index, :show]
 
   before_action :set_branch, except: [:index, :create, :new]
 

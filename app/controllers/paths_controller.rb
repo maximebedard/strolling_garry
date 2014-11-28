@@ -42,6 +42,7 @@ class PathsController < ApplicationController
   end
 
   def map
+    redirect_to edit_path_path(@path), flash:{ alert: 'Path does not have a starting branch.'} unless @path.branch
   end
 
   # GET /paths/new
@@ -66,7 +67,7 @@ class PathsController < ApplicationController
   # PUT /paths/1
   def update
     if @path.update_attributes(path_params)
-      redirect_to map_path_path(@path), info: 'Path was successfully updated.'
+      redirect_to map_path_path(@path), flash: {info: 'Path was successfully updated.'}
     else
       render action: "edit"
     end

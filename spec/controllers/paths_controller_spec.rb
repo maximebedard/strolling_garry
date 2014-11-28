@@ -4,7 +4,6 @@ RSpec.describe PathsController, :type => :controller do
 
   describe "GET #index" do
     login_user
-
     it "responds successfully with an HTTP 200 status code" do
       get :index
       expect(response).to be_success
@@ -20,10 +19,70 @@ RSpec.describe PathsController, :type => :controller do
 
   end
 
-  #was the web request successful?
-  #was the user redirected to the right page?
-  #was the user successfully authenticated?
-  #was the correct object stored in the response template?
-  #was the appropriate message displayed to the user in the view?
+  describe "GET #potential_clients" do
+    login_user
+
+
+  end
+
+  describe "GET #map" do
+    login_user
+
+
+  end
+
+  describe "GET #reports" do
+    login_user
+
+
+  end
+
+  describe "GET #index" do
+    login_user
+
+
+  end
+
+  describe "GET #create" do
+    login_user
+
+
+  end
+
+  describe "GET #new" do
+    login_user
+
+
+  end
+
+  describe "GET #edit" do
+    login_user
+
+
+  end
+
+  describe "GET #show" do
+    login_user
+
+
+  end
+
+  describe "GET #update" do
+    login_user
+
+
+  end
+
+  describe "GET #update" do
+    login_user
+
+
+  end
+
+  describe "GET #destroy" do
+    login_user
+
+
+  end
 
 end

@@ -3,20 +3,11 @@ require 'rails_helper'
 RSpec.describe BranchesController, :type => :controller do
 
 
-  describe "GET #index" do
+  context "as a user" do
 
-    describe "as user" do
-      login_user
+    login_user
 
-      it "responds HTTP 302 status code and redirect to root" do
-        get :index
-        expect(response).to have_http_status(302)
-        expect(response).to redirect_to(root_path)
-      end
-    end
-
-    describe "as admin" do
-      login_admin
+    describe "GET #index" do
 
       it "responds successfully with an HTTP 200 status code" do
         get :index
@@ -24,31 +15,17 @@ RSpec.describe BranchesController, :type => :controller do
         expect(response).to have_http_status(200)
       end
 
+
       it "renders the index template" do
         get :index
         expect(response).to render_template('index')
       end
 
       pending "loads all of the branches into @branches"
+
     end
 
-  end
-
-  describe "GET #show" do
-
-    describe "as user" do
-      login_user
-
-      it "responds HTTP 302 status code and redirect to root" do
-        get :index
-        expect(response).to have_http_status(302)
-        expect(response).to redirect_to(root_path)
-      end
-    end
-
-    describe "as admin" do
-      login_admin
-
+    describe "GET #show" do
       it "responds with the corresponding @branch json" do
         branch = create(:branch)
         get :show, format: :json, id: branch.id
@@ -66,55 +43,71 @@ RSpec.describe BranchesController, :type => :controller do
         expect(response).to have_http_status(200)
         expect(response).to render_template('show')
       end
+    end
 
+    describe "GET #edit" do
+      it "denies access and the user is redirected to root" do
+        branch = create(:branch)
+        get :edit, id: branch.id
+
+        access_denied
+      end
+    end
+
+    describe "PUT #update" do
+      it "denies access and the user is redirected to root" do
+        branch = create(:branch)
+        post :update, id: branch.id
+        access_denied
+      end
+    end
+
+
+    describe "CREATE #create" do
+      it "denies access and the user is redirected to root" do
+        post :create, attributes_for(:branch)
+        access_denied
+      end
+    end
+
+    describe "DELETE #destroy" do
+      it "denies access and the user is redirected to root" do
+        branch = create(:branch)
+        delete :destroy, id: branch.id
+      end
     end
 
   end
 
-  describe "GET #edit" do
+  context "as an admin" do
+    login_admin
 
-    describe "as user" do
+    describe "GET #index" do
+      it "responds successfully with an HTTP 200 status code" do
+        get :index
+        expect(response).to be_success
+        expect(response).to have_http_status(200)
+      end
 
+      it "renders the index template" do
+        get :index
+        expect(response).to render_template('index')
+      end
+
+      pending "loads all of the branches into @branches"
     end
 
-    describe "as admin" do
-
-    end
-
+    pending "GET #show"
+    pending "GET #edit"
+    pending "PUT #update"
+    pending "CREATE #create"
+    pending "DELETE #destroy"
   end
 
-  describe "POST #create" do
 
-    describe "as user" do
-
-    end
-
-    describe "as admin" do
-
-    end
-
-  end
-
-  describe "PUT #update" do
-    describe "as user" do
-
-    end
-
-    describe "as admin" do
-
-    end
-
-  end
-
-  describe "DELETE #destroy" do
-    describe "as user" do
-
-    end
-
-    describe "as admin" do
-
-    end
-    
+  def access_denied
+    expect(response).to have_http_status(302)
+    expect(response).to redirect_to(root_path)
   end
 
 end

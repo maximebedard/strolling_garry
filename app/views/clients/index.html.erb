@@ -1,12 +1,11 @@
 
-<%= panel_for title: 'My clients', size: 12 do %>
+<%= panel_for title: 'Clients', size: 12 do %>
   <div class="panel-body">
 
     <% if @clients.length > 0 %>
       <table class="table table-bordered">
         <tr>
           <th>Name</th>
-          <th>Description</th>
           <th>Address</th>
           <th>Estimated Delivery Time</th>
           <th>Delivery Item</th>
@@ -15,10 +14,9 @@
         <% @clients.each do |client| %>
         <tr>
           <td><%= client.name %></td>
-          <td><%= client.description %></td>
           <td><%= render client.address %></td>
-          <td><%= client.estimated_delivery_time %></td>
-          <td><%= client.delivery_item %></td>
+          <td><%= "#{client.estimated_delivery_time} min(s)" %></td>
+          <td><%= client.delivery_item || "N/A" %></td>
           <td class="text-center">
             <div class="btn-group">
               <%= icon_to 'glyphicon glyphicon-edit', edit_client_path(client), '', class: 'btn btn-warning' %>

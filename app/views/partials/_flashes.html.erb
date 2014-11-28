@@ -1,6 +1,6 @@
 
-<% flash.select {|k,_| %w(info success).include? k } .each do |type, message| %>
-  <div class="alert <%= "alert-#{type}" %>">
+<% flash.select {|k,_| !(alert_for k.to_sym).nil? } .each do |type, message| %>
+  <div class="alert <%= "alert-#{alert_for type.to_sym}" %>">
     <button class="close" data-dismiss="alert">×</button>
     <%= message %>
   </div>

@@ -22,6 +22,14 @@ module PanelHelper
     ".html_safe
   end
 
+  def alert_for(flash)
+    {
+      notice: 'success',
+      alert: 'danger',
+      info: 'info'
+    }[flash];
+  end
+
   def errors_for(record, options = {})
 
     return if record.errors.empty?

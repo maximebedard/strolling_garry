@@ -1,0 +1,40 @@
+
+<%= panel_for title: 'Branches', size: 12 do %>
+  <div class="panel-body">
+
+    <% if @branches.length > 0 %>
+      <table class="table table-bordered">
+        <tr>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Actions</th>
+        </tr>
+        <% @branches.each do |branch| %>
+        <tr>
+          <td><%= branch.name %></td>
+          <td><%= render branch.address %></td>
+          <td class="text-center">
+            <div class="btn-group">
+              <%= icon_to 'glyphicon glyphicon-edit', edit_branch_path(branch), '', class: 'btn btn-warning' %>
+              <%= icon_to 'glyphicon glyphicon-remove-circle', branch, '', method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+            </div>
+          </td>
+        </tr>
+        <% end %>
+      </table>
+      <div class="text-center">
+        <%= paginate @branches %>
+      </div>
+
+    <% end %>
+
+    <% if @branches.length == 0 %>
+      <p>No branches... please click on the button below to create a new branch.</p>
+    <% end %>
+
+  </div>
+
+  <div class="panel-footer text-right">
+    <%= link_to 'Add new', new_branch_path, class: 'btn btn-primary' %>
+  </div>
+<% end %>

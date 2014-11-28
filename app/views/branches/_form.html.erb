@@ -1,0 +1,25 @@
+
+<%= errors_for @branch %>
+
+<%= form_for @branch do |f| %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description %>
+    <%= f.text_area :description, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :address %>
+    <%= f.fields_for :address do |ff| %>
+      <%= render partial:'partials/address_form', locals:{f: ff} %>
+    <% end %>
+  </div>
+
+  <%= f.submit class: "btn btn-lg btn-primary btn-block" %>
+
+<% end %>

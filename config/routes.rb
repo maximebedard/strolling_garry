@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get 'reports'
     end
   end
+  resources :branches
   resources :clients
   resources :potential_clients
 

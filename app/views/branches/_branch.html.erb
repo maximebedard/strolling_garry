@@ -1,0 +1,10 @@
+
+<i class="fa fa-briefcase"></i> <strong><%= @branch.name %></strong><br>
+
+<% if !@branch.description.empty? %>
+  <i><%= @branch.description %></i></br>
+<% end %>
+<%= render @branch.address %>
+<% if current_user.try :admin? %>
+  <%= icon_to "glyphicon glyphicon-edit", edit_branch_path(@branch), "Modifier", class: 'pull-right' %>
+<% end %>

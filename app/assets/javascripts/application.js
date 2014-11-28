@@ -17,6 +17,8 @@ $(document).ready(function(){
     }
   });
 
+  $("[data-toggle='buttons'] > .field_with_errors").data('toggle', 'button');
+
   $("[data-provide='scrollable']").each(function(i, el){
     $(el).perfectScrollbar();
     $(el).addClass("scrollable");

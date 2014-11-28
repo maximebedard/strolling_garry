@@ -1,12 +1,11 @@
 
-<%= panel_for title: 'My potential clients', size: 12 do %>
+<%= panel_for title: 'Potential clients', size: 12 do %>
   <div class="panel-body">
 
     <% if @potential_clients.length > 0 %>
       <table class="table table-bordered">
         <tr>
           <th>Name</th>
-          <th>Description</th>
           <th>Address</th>
           <th>Estimated Time Spent</th>
           <th>Marketing Agent Name</th>
@@ -16,13 +15,12 @@
         <% @potential_clients.each do |potential_client| %>
         <tr>
           <td><%= potential_client.name %></td>
-          <td><%= potential_client.description %></td>
           <td><%= render partial: "partials/address", locals: { address: potential_client.address} %></td>
-          <td><%= potential_client.time_spent %></td>
-          <td><%= potential_client.marketing_agent_name %></td>
-          <td><%= potential_client.decision %></td>
+          <td><%= "#{potential_client.time_spent || 0 } min(s)" %></td>
+          <td><%= potential_client.marketing_agent_name || "N/A" %></td>
+          <td><%= potential_client.decision || "N/A" %></td>
           <td class="text-center">
-            <div class="btn btn-group">
+            <div class="btn-group">
               <%= icon_to 'glyphicon glyphicon-edit', edit_potential_client_path(potential_client), '', class: 'btn btn-warning' %>
               <%= icon_to 'glyphicon glyphicon-remove-circle', potential_client, '', method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
             </div>

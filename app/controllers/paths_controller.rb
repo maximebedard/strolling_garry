@@ -1,5 +1,6 @@
 class PathsController < ApplicationController
 
+  # Set custom layout for map action
   layout 'map', only: [:map]
 
   # This is Devise's authentication
@@ -11,7 +12,6 @@ class PathsController < ApplicationController
   # GET /paths.json
   def index
     @paths = current_user.paths.all.page(params[:page]).per(15)
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @paths }
@@ -23,17 +23,18 @@ class PathsController < ApplicationController
   def show
     respond_to do |format|
       format.html # show.html.erb
-      format.js # show.js.erb
       format.json { render json: @path }
     end
   end
 
+  # GET /paths/1/clients.json
   def clients
     respond_to do |format|
       format.json { render json: @path.clients }
     end
   end
 
+  # GET /paths/1/potential_clients.json
   def potential_clients
     respond_to do |format|
       format.json { render json: @path.potential_clients }
@@ -41,17 +42,11 @@ class PathsController < ApplicationController
   end
 
   def map
-
   end
 
   # GET /paths/new
-  # GET /paths/new.json
   def new
     @path = current_user.paths.build
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @path }
-    end
   end
 
   # GET /paths/1/edit
@@ -59,44 +54,28 @@ class PathsController < ApplicationController
   end
 
   # POST /paths
-  # POST /paths.json
   def create
     @path = current_user.paths.build(path_params)
-
-    respond_to do |format|
-      if @path.save
-        format.html { redirect_to paths_path, flash: {info: 'Path was successfully created.', selected: @path.id} }
-        format.json { render json: @path, status: :created, location: @path }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @path.errors, status: :unprocessable_entity }
-      end
+    if @path.save
+      redirect_to map_path_path(@path), flash: {info: 'Path was successfully created.'}
+    else
+      render action: "new"
     end
   end
 
   # PUT /paths/1
-  # PUT /paths/1.json
   def update
-    respond_to do |format|
-      if @path.update_attributes(path_params)
-        format.html { redirect_to map_path_path @path, info: 'Path was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @path.errors, status: :unprocessable_entity }
-      end
+    if @path.update_attributes(path_params)
+      redirect_to map_path_path(@path), info: 'Path was successfully updated.'
+    else
+      render action: "edit"
     end
   end
 
   # DELETE /paths/1
-  # DELETE /paths/1.json
   def destroy
     @path.destroy
-
-    respond_to do |format|
-      format.html { redirect_to paths_url }
-      format.json { head :no_content }
-    end
+    redirect_to paths_path, flash: {info: "Path was successfully deleted."}
   end
 
   private

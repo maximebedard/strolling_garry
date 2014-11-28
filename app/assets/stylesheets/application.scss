@@ -105,3 +105,9 @@ body {
 .fa-walking:before {
   content: "\f183";
 }
+
+@media print {
+    body > * {display: none;}
+    body > #directionsModal {display: block;}
+    #directionsModal, #directionsModal > div {position: static !important;}
+}

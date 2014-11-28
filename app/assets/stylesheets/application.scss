@@ -92,3 +92,9 @@ body {
   border:1px solid #e7e7e7;
   border-top:none;
 }
+
+@media print {
+    body > * {display: none;}
+    body > #directionsModal {display: block;}
+    #directionsModal, #directionsModal > div {position: static !important;}
+}

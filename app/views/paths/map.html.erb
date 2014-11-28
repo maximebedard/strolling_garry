@@ -26,6 +26,9 @@
     directionsDisplay = new google.maps.DirectionsRenderer();
     infoWindow        = new google.maps.InfoWindow();
 
+    // Bind print button
+    $("#btnPrint").click(print_path);
+
     // Initialize the default map options hash
     mapOptions = {
       center: new google.maps.LatLng(45.536482, -73.592702),
@@ -105,7 +108,11 @@
         directionsDisplay.setDirections(response);
       }
     });
-  })
+  });
+
+  function print_path() {
+      window.print();
+  }
 
 </script>
 <% end %>

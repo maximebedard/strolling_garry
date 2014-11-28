@@ -8,31 +8,10 @@
   "dependencies": {
     "jquery": "2.1.1",
     "bootstrap": "3.2.0",
-    "lodash": "2.4.1",
-    "bluebird": "2.3.6",
     "chartjs": "1.0.1-beta",
-    "angular-bootstrap": "0.11.2",
-    "angular-animate": "1.3.0",
     "perfect-scrollbar": "0.5.3",
-    "angular": "1.2.26",
-    "angular-route": "1.2.x",
-    "angular-loader": "1.2.x",
-    "angular-mocks": "~1.2.x",
-    "angular-devise": "0.6.1",
-    "angular-google-maps": "2.0.1",
-    "ngDraggable": "26698db94ebbab3f85f98d8c01e1e8828d27cdcf",
-    "html5-boilerplate": "~4.3.0",
     "font-awesome": "4.2.0",
-    "angular-resource": "~1.3.0",
-    "angular-ui-router": "~0.2.11",
     "selectize": "~0.11.2",
-    "angular-ui-map": "~0.5.0",
-    "angular-ui-select": "~0.8.3",
-    "angular-sanitize": "~1.3.3",
-    "bootstrap-datepicker": "~1.3.0",
-    "underscore": "~1.7.0"
-  },
-  "resolutions": {
-    "angular": "1.2.26"
+    "bootstrap-datepicker": "~1.3.0"
   }
 }

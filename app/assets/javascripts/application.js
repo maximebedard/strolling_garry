@@ -17,7 +17,9 @@ $(document).ready(function(){
     }
   });
 
-  $("[data-toggle='buttons'] > .field_with_errors").data('toggle', 'button');
+  $("[data-provide='datepicker']").each(function(i, el){
+      $(el).datepicker({format:'yyyy-mm-dd'});
+  })
 
   $("[data-provide='scrollable']").each(function(i, el){
     $(el).perfectScrollbar();

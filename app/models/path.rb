@@ -2,7 +2,7 @@ class Path < ActiveRecord::Base
 
   # Constants
   MODES = %w(DRIVING BICYCLING TRANSIT WALKING)
-  PATH_TYPES = %w(delivery marketing)
+  PATH_TYPES = %w(Delivery Marketing)
 
   # Relations
   has_and_belongs_to_many :clients

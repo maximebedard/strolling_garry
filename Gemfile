@@ -39,6 +39,8 @@ group :development, :test do
   gem 'sqlite3'
 end
 
+gem "codeclimate-test-reporter", group: :test, require: nil
+
 group :production do
   gem 'pg'
   gem 'rails_12factor'

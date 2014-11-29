@@ -12,32 +12,56 @@
 
 
 <%= content_for :scripts do %>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?sensor=false">
+    </script>
     <script type="text/javascript">
 
         var pointsLabels = [];
+        var points = [];
+        var elevations = [];
+        var elevationService = new google.maps.ElevationService();
+
+        loadPath();
 
         function loadPath() {
             $.getJSON("http://localhost:3000/paths/1.json", function (data) {
                 getAddress(data.clients);
                 getAddress(data.potential_clients);
             });
+            getElevation(points);
         }
 
         function getAddress(data) {
             $.each(data, function (key, value) {
                 $.getJSON("http://localhost:3000/clients/" + value.id, function (data) {
                     pointsLabels.push(data.name);
- //                   getElevation(data.address.longitude, data.address.latitude);
+                    points.push(new google.maps.LatLng(data.address.longitude, data.address.latitude));
                 });
             });
         }
-/*
-        function getElevation(longitude, latitude) {
-            $.getJSON("https://maps.googleapis.com/maps/api/elevation/json?locations=" + longitude + "," + latitude + "key=??", function (data) {
-                console.log(data);
+
+        function getElevation(points) {
+
+            var requete = {
+                'locations': points
+            }
+
+            elevationService.getElevationForLocations(requete, function(results, status) {
+                $.each(results, function(index, value) {
+                    elevations.push(value.elevation);
+                });
             });
+            createChart(pointsLabels, elevations);
         }
-*/
+
+        function debugging() {
+            for (var i = 0; i < points.length; i++) {
+                console.log(":: " + pointsLabels[i] + " :: " + points[i] + " :: " + elevations[i]);
+            }
+        }
+
         function createChart(labels, elevation) {
             points = {
                 labels : labels,

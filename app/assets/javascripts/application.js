@@ -3,6 +3,7 @@
 //= require bootstrap/dist/js/bootstrap
 //= require perfect-scrollbar/min/perfect-scrollbar.min
 //= require bootstrap-datepicker/js/bootstrap-datepicker
+//= require chartjs/Chart
 
 $(document).ready(function(){
 

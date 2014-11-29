@@ -1,17 +1,58 @@
 
 
 <%= panel_for title: 'Reports', size: 12 do %>
-<div class="panel-body">
-  Bonjour
-</div>
-<div class="panel-footer text-right">
-  <%= back_to paths_path %>
-</div>
+    <div class="panel-body" style="text-align: center">
+        <h1>Altitude par point du trajet</h1>
+        <canvas id="altitude" width="600" height="400"></canvas>
+    </div>
+    <div class="panel-footer text-right">
+      <%= back_to paths_path %>
+    </div>
 <% end %>
 
 
 <%= content_for :scripts do %>
-  <script type="text/javascript">
+    <script type="text/javascript">
 
-  </script>
+        var pointsLabels = [];
+
+        function loadPath() {
+            $.getJSON("http://localhost:3000/paths/1.json", function (data) {
+                getAddress(data.clients);
+                getAddress(data.potential_clients);
+            });
+        }
+
+        function getAddress(data) {
+            $.each(data, function (key, value) {
+                $.getJSON("http://localhost:3000/clients/" + value.id, function (data) {
+                    pointsLabels.push(data.name);
+ //                   getElevation(data.address.longitude, data.address.latitude);
+                });
+            });
+        }
+/*
+        function getElevation(longitude, latitude) {
+            $.getJSON("https://maps.googleapis.com/maps/api/elevation/json?locations=" + longitude + "," + latitude + "key=??", function (data) {
+                console.log(data);
+            });
+        }
+*/
+        function createChart(labels, elevation) {
+            points = {
+                labels : labels,
+                datasets : [
+                    {
+                        fillColor : "rgba(172,194,132,0.4)",
+                        strokeColor : "#ACC26D",
+                        pointColor : "#fff",
+                        pointStrokeColor : "#9DB86D",
+                        data : elevation
+                    }
+                ]
+            }
+            var altitude = document.getElementById('altitude').getContext('2d');
+            new Chart(altitude).Line(points);
+        }
+    </script>
 <% end %>

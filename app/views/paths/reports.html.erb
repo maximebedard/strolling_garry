@@ -1,9 +1,24 @@
 
 
 <%= panel_for title: 'Reports', size: 12 do %>
-    <div class="panel-body" style="text-align: center">
-        <h1>Altitude par point du trajet</h1>
-        <canvas id="altitude" width="600" height="400"></canvas>
+    <div class="panel-body text-center">
+        <h1>Delivery path elevation variation</h1>
+        <strong>Total distance : <span id="deliveryTotalDistance"></span> KM</strong><br>
+        <strong>Total duration : <span id="deliveryTotalDuration"></span> min(s)</strong><br>
+        <strong>Total steps : <span id="deliveryTotalSteps"></span></strong><br>
+        <div class="row">
+          <div class="col-sm-10 col-sm-offset-1" id="deliveryElevation" style="height:400px;"></div>
+        </div>
+
+        <h1>Marketing path elevation variation</h1>
+        <strong>Total distance : <span id="marketingTotalDistance"></span> KM</strong><br>
+        <strong>Total duration : <span id="marketingTotalDuration"></span> min(s)</strong><br>
+        <strong>Total steps : <span id="marketingTotalSteps"></span></strong><br>
+
+        <div class="row">
+          <div class="col-sm-10 col-sm-offset-1" id="marketingElevation" style="height:400px;"></div>
+        </div>
+
     </div>
     <div class="panel-footer text-right">
       <%= back_to paths_path %>
@@ -12,71 +27,137 @@
 
 
 <%= content_for :scripts do %>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-    <script type="text/javascript"
-            src="https://maps.googleapis.com/maps/api/js?sensor=false">
-    </script>
-    <script type="text/javascript">
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD28wyczXQXdz2WOEi7lI46-BAGiMidNb0"></script>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript">
 
-        var pointsLabels = [];
-        var points = [];
-        var elevations = [];
-        var elevationService = new google.maps.ElevationService();
+    var elevator;
 
-        loadPath();
+    google.load("visualization", "1", {packages:["corechart"]});
 
-        function loadPath() {
-            $.getJSON("http://localhost:3000/paths/1.json", function (data) {
-                getAddress(data.clients);
-                getAddress(data.potential_clients);
-            });
-            getElevation(points);
+    google.setOnLoadCallback(init);
+
+    function init(){
+
+      elevator = new google.maps.ElevationService();
+      directionsService = new google.maps.DirectionsService();
+
+      var start = new google.maps.LatLng(<%= @path.branch.address.latitude %>, <%= @path.branch.address.longitude %>);
+      var clients = [];
+      var potentialClients = [];
+
+      $.when(
+        $.getJSON('clients.json', function(data){ clients = data; }),
+        $.getJSON('potential_clients.json', function(data){ potentialClients = data; })
+      ).done(function(){
+
+        var generateCoords = function(el, i){
+          return new google.maps.LatLng(el.address.latitude, el.address.longitude);
+        };
+
+        var clientsCoords = $.map(clients, generateCoords);
+
+        var potentialClientsCoords = $.map(potentialClients, generateCoords);
+
+        generatePath(start, clientsCoords, {
+          elevationSelector: "#deliveryElevation",
+          distanceSelector: "#deliveryTotalDistance",
+          durationSelector: "#deliveryTotalDuration",
+          stepsSelector: "#deliveryTotalSteps"
+        });
+
+        generatePath(start, potentialClientsCoords, {
+          elevationSelector: "#marketingElevation",
+          distanceSelector: "#marketingTotalDistance",
+          durationSelector: "#marketingTotalDuration",
+          stepsSelector: "#marketingTotalSteps"
+        });
+
+      });
+
+    }
+
+    function generatePath(start, coords, selectors) {
+
+      var waypoints = $.map(coords, function(el, i){
+        return { location: el.toString(), stopover:true };
+      });
+
+      var request = {
+        origin: start,
+        destination: start,
+        travelMode: google.maps.TravelMode["<%= @path.mode %>"],
+        waypoints: waypoints,
+        optimizeWaypoints: true
+      };
+
+      directionsService.route(request, function(response, status) {
+        if (status == google.maps.DirectionsStatus.OK) {
+
+          var totalDistance = 0;
+          var totalDuration = 0;
+          var totalSteps = 0;
+          var legs = response.routes[0].legs;
+
+          $.each(legs, function(i, el){
+            totalDistance += el.distance.value;
+            totalDuration += el.duration.value;
+            totalSteps += el.steps.length;
+
+          });
+
+
+          $(selectors.distanceSelector).text((totalDistance / 1000).toFixed(2));
+          $(selectors.durationSelector).text((totalDuration / 60).toFixed(2));
+          $(selectors.stepsSelector).text(totalSteps);
+
+          var elevCoords = $.map(legs, function(el, i){
+            return el.start_location;
+          });
+
+          drawElevationChart(elevCoords, selectors);
+
         }
+      });
 
-        function getAddress(data) {
-            $.each(data, function (key, value) {
-                $.getJSON("http://localhost:3000/clients/" + value.id, function (data) {
-                    pointsLabels.push(data.name);
-                    points.push(new google.maps.LatLng(data.address.longitude, data.address.latitude));
-                });
-            });
+
+    }
+
+    function drawElevationChart(coords, selectors) {
+
+      var pathRequest = {
+        'path': coords,
+        'samples': 256
+      }
+
+      // Initiate the path request.
+      elevator.getElevationAlongPath(pathRequest, function(results, status){
+        if (status == google.maps.ElevationStatus.OK) {
+
+          var data = new google.visualization.DataTable();
+          data.addColumn('string', 'Sample');
+          data.addColumn('number', 'Elevation (meters)');
+
+          $.each(results, function(i, el){
+            data.addRow(['', el.elevation]);
+          });
+
+
+          var options = {
+            legend: { position: 'none' }
+          };
+
+          var chart = new google.visualization.LineChart($(selectors.elevationSelector).get(0));
+
+          chart.draw(data, options);
+
+
         }
+      });
 
-        function getElevation(points) {
 
-            var requete = {
-                'locations': points
-            }
+    }
 
-            elevationService.getElevationForLocations(requete, function(results, status) {
-                $.each(results, function(index, value) {
-                    elevations.push(value.elevation);
-                });
-            });
-            createChart(pointsLabels, elevations);
-        }
 
-        function debugging() {
-            for (var i = 0; i < points.length; i++) {
-                console.log(":: " + pointsLabels[i] + " :: " + points[i] + " :: " + elevations[i]);
-            }
-        }
-
-        function createChart(labels, elevation) {
-            points = {
-                labels : labels,
-                datasets : [
-                    {
-                        fillColor : "rgba(172,194,132,0.4)",
-                        strokeColor : "#ACC26D",
-                        pointColor : "#fff",
-                        pointStrokeColor : "#9DB86D",
-                        data : elevation
-                    }
-                ]
-            }
-            var altitude = document.getElementById('altitude').getContext('2d');
-            new Chart(altitude).Line(points);
-        }
-    </script>
+  </script>
 <% end %>

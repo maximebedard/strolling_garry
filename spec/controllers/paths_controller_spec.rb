@@ -22,11 +22,22 @@ RSpec.describe PathsController, :type => :controller do
   describe "GET #potential_clients" do
     login_user
 
+    pending "reponds successfully with an HTTP 200 status code"
+
+    pending "render the path's potential clients"
 
   end
 
   describe "GET #map" do
     login_user
+
+
+    pending "reponds successfully with an HTTP 200 status code"
+
+    pending "render the map.html.erb"
+
+    pending "pass the @path"
+
 
 
   end
